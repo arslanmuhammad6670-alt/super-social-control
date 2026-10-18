@@ -1,4 +1,4 @@
-const CACHE = 'super-social-v27';
+const CACHE = 'super-social-v29';
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html', './manifest.json'])).then(() => self.skipWaiting()));
 });

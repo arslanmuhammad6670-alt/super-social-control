@@ -1,7 +1,7 @@
 /* Super Social Control PWA — service worker
-   App shell cached so the app opens offline.
-   API calls (Pollinations / Facebook) always go to network. */
-var CACHE = 'super-social-v7';
+   App shell ko cache karta hai taa ke app offline bhi khule.
+   API calls (Pollinations / Facebook) hamesha network se jati hain. */
+var CACHE = 'super-social-v8';
 var SHELL = [
   './',
   './index.html',
@@ -10,37 +10,37 @@ var SHELL = [
   './icon-512.png'
 ];
 
-self.addEventListener('install', function (event) {
+self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
+    caches.open(CACHE).then(function(cache) {
       return cache.addAll(SHELL);
-    }).then(function () { return self.skipWaiting(); })
+    }).then(function() { return self.skipWaiting(); })
   );
 });
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', function(event) {
   event.waitUntil(
-    caches.keys().then(function (keys) {
-      return Promise.all(keys.map(function (k) {
+    caches.keys().then(function(keys) {
+      return Promise.all(keys.map(function(k) {
         return k === CACHE ? null : caches.delete(k);
       }));
-    }).then(function () { return self.clients.claim(); })
+    }).then(function() { return self.clients.claim(); })
   );
 });
 
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', function(event) {
   var url = event.request.url;
-  // Only cache-first for same-origin GET requests; everything else goes to network.
+  // Sirf apni origin ki GET requests cache-first; baqi sab seedha network.
   if (event.request.method !== 'GET' || url.indexOf(self.location.origin) !== 0) return;
   event.respondWith(
-    caches.match(event.request).then(function (hit) {
-      var network = fetch(event.request).then(function (res) {
+    caches.match(event.request).then(function(hit) {
+      var network = fetch(event.request).then(function(res) {
         if (res && res.ok) {
           var copy = res.clone();
-          caches.open(CACHE).then(function (cache) { cache.put(event.request, copy); });
+          caches.open(CACHE).then(function(cache) { cache.put(event.request, copy); });
         }
         return res;
-      }).catch(function () { return hit; });
+      }).catch(function() { return hit; });
       return hit || network;
     })
   );

@@ -17,10 +17,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,650;1,6..72,500&display=swap" rel="stylesheet" />
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <style>
       /* Muse jaisi theme: garam paper-cream surfaces, clay accent, saaf chat look.
@@ -453,6 +449,10 @@
       .gate .ordiv::before, .gate .ordiv::after { content: ""; flex: 1; height: 1px; background: var(--line); }
       .gate .guestbtn { width: 100%; max-width: 340px; margin: 0 auto; display: flex; }
       .gate .fineprint { margin-top: 20px; }
+      .gate .phoneform { margin-top: 26px; }
+      .phoneform { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+      .phoneform .btn { margin-top: 2px; }
+      #phoneHint { text-align: center; min-height: 15px; }
 
       @media (prefers-reduced-motion: reduce) {
         .typing i, .spinner, .splash .s-in, .splash .s-bar i { animation: none; }
@@ -483,14 +483,22 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
         </div>
         <h1>Super Social Control</h1>
-        <p class="tag">Khush aamdeed! Google se sign in karo taake tumhari chats aur settings tumhare account ke saath mehfooz rahen — ya guest ke tor pe foran shuru kar do.</p>
-        <div class="gwrap">
-          <div class="gbtn" id="gLogin"></div>
-          <div class="mini" id="gLoginHint"></div>
-        </div>
+        <p class="tag">Khush aamdeed! Apna phone number dalo aur foran andar — koi OTP nahi, koi intezaar nahi. Ya guest ke tor pe shuru kar do.</p>
+        <form class="phoneform" id="phoneForm">
+          <div>
+            <label class="flabel" for="phoneCc">Country</label>
+            <select class="field" id="phoneCc"></select>
+          </div>
+          <div>
+            <label class="flabel" for="phoneNum">Phone number</label>
+            <input class="field" id="phoneNum" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 1234567" />
+          </div>
+          <button class="btn btn-primary" type="submit">Continue</button>
+          <div class="mini" id="phoneHint" role="alert"></div>
+        </form>
         <div class="ordiv"><span>ya</span></div>
         <button class="btn btn-ghost guestbtn" type="button" id="guestBtn">Continue as Guest</button>
-        <p class="mini fineprint">Guest mode mein sab kuch sirf is device pe rehta hai. Google sign-in ke liye Settings mein ek dafa Google Client ID dalna hota hai — ya Firebase configure kar do.</p>
+        <p class="mini fineprint">Phone number sirf is device pe tumhari pehchan ke liye save hota hai — koi SMS ya OTP nahi bheja jata. Guest mode mein bhi sab kuch is device pe hi rehta hai.</p>
       </div>
     </div>
 
@@ -678,68 +686,20 @@
               </details>
             </div>
 
-            <div class="card">
-              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Google Account</h2>
-              <p class="hint">Apne <b>Gmail account</b> se sign in karo taake chats aur settings tumhare saath rahen.</p>
-              <div class="gprofile" id="gProfile" hidden>
-                <img id="gProfileImg" alt="Google profile photo" />
-                <div>
-                  <div class="n" id="gProfileName"></div>
-                  <div class="e" id="gProfileEmail"></div>
+                        <div class="card">
+              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg>Tumhara Account</h2>
+              <p class="hint">Is app mein tumhari pehchan tumhara <b>phone number</b> hai — koi password, koi OTP nahi. Number sirf is device pe save hota hai.</p>
+              <div class="acct">
+                <div class="who">
+                  <div class="nm" id="acctTitle">Guest mode</div>
+                  <div class="meta" id="acctSub"></div>
                 </div>
+                <span class="badge" id="acctBadge">GUEST</span>
               </div>
-              <div class="gwrap" id="gSettingsWrap">
-                <div class="gbtn" id="gSettings"></div>
-                <div class="mini" id="gSettingsHint"></div>
-              </div>
-              <button class="btn btn-ghost danger" type="button" id="gSignOut" hidden>Google se sign out karo</button>
-              <button class="btn btn-ghost" type="button" id="logoutBtn">App se log out karo</button>
-              <div class="status" id="gStatus" role="status"></div>
-              <details class="adv">
-                <summary>Advanced — Google Client ID</summary>
-                <div class="advbody">
-                  <div>
-                    <label class="flabel" for="googleClientId">Google Client ID</label>
-                    <input class="field" type="text" id="googleClientId" placeholder="….apps.googleusercontent.com" autocomplete="off" />
-                    <p class="mini" style="margin:8px 0 0">Client ID Google Cloud Console se banta hai: <b>APIs &amp; Services → Credentials → Create Credentials → OAuth client ID → Web application</b>. “Authorized JavaScript origins” mein <b>https://arslanmuhammad6670-alt.github.io/super-social-control</b> add karna zaroori hai, warna sign-in nahi chale ga.</p>
-                  </div>
-                </div>
-              </details>
+              <button class="btn btn-ghost danger" type="button" id="logoutBtn">App se log out karo</button>
             </div>
 
-            <div class="card">
-              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 19h10.5z"/><path d="M12 12v9"/><path d="m8.5 17.5 3.5-3.5 3.5 3.5"/></svg>Cloud Sync — Firebase</h2>
-              <p class="hint">Google sign-in ke saath chats aur settings cloud mein sync ho jati hain — naye phone pe bhi sab wapas mil jata hai.</p>
-              <button class="btn btn-ghost" type="button" id="syncNowBtn">Abhi sync karo</button>
-              <div class="status" id="syncStatus" role="status"></div>
-              <details class="adv">
-                <summary>Advanced — Firebase setup</summary>
-                <div class="advbody">
-                  <div>
-                    <label class="flabel" for="firebaseApiKey">Firebase apiKey</label>
-                    <input class="field" type="text" id="firebaseApiKey" placeholder="AIza…" autocomplete="off" />
-                  </div>
-                  <div>
-                    <label class="flabel" for="firebaseAuthDomain">authDomain</label>
-                    <input class="field" type="text" id="firebaseAuthDomain" placeholder="your-app.firebaseapp.com" autocomplete="off" />
-                  </div>
-                  <div>
-                    <label class="flabel" for="firebaseProjectId">projectId</label>
-                    <input class="field" type="text" id="firebaseProjectId" placeholder="your-app-id" autocomplete="off" />
-                  </div>
-                  <p class="mini">Ye teeno values Firebase Console → Project settings → “Your apps” (Web app) mein milti hain. Wahan <b>Authentication → Google</b> sign-in bhi enable karna, aur <b>Firestore Database</b> banana. <b>Tokens aur keys kabhi sync nahi hote</b> — woh sirf is device pe rehte hain.</p>
-                  <div>
-                    <label class="flabel">Firestore security rules (zaroori)</label>
-                    <p class="rulesbox">match /users/{userId} {
-  allow read, write: if request.auth.uid == userId;
-}</p>
-                    <p class="mini" style="margin:8px 0 0">Ye rules lagane se har user sirf <b>apna</b> data parh/likh sakta hai — koi doosra tumhari chats nahi dekh sakta.</p>
-                  </div>
-                </div>
-              </details>
-            </div>
-
-            <div class="card">
+<div class="card">
               <h2><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16V4.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4V11H7v3h2.6v7h3.9z"/></svg>Facebook Pages</h2>
               <p class="hint">Login karo, apna Page select karo — bas. Ek se zyada Pages bhi connect ho sakte hain; post <b>Active</b> Page pe jati hai.</p>
               <button class="btn btn-fblogin" type="button" id="fbLoginBtn">
@@ -1011,15 +971,12 @@
 
       $('wipeBtn').addEventListener('click', function () {
         LS.wipe();
-        $('googleClientId').value = '';
         $('groqKey').value = ''; $('geminiKey').value = '';
-        $('firebaseApiKey').value = ''; $('firebaseAuthDomain').value = ''; $('firebaseProjectId').value = '';
         postToggle.checked = true;
         state.fbName = ''; state.history = [];
         renderFbAccounts(); renderIgAccounts(); updateIgPostHint();
         refreshChips();
-        renderGoogleUI();
-        updateSyncStatus();
+        renderAccountUI();
         setStatus($('wipeStatus'), 'Saaf ho gaya. Saari settings is device se hata di gayi hain.', 'ok');
       });
 
@@ -2046,285 +2003,122 @@
         });
       }
 
-      /* ============ Google sign-in + Firebase Cloud Sync ============ */
-      var fbApp = null, fbAuth = null, fbDb = null, fbUser = null;
-      var gsiReady = false, gsiTries = 0, pushTimer = null;
+      /* ============ Phone login — pehchan sirf is device ke localStorage mein ============
+         Koi backend, koi OTP nahi: phone number hi login hai. Har country ka
+         number chalega — neeche saare countries ke dial codes hain, koi
+         country restrict nahi hai. Default: Pakistan (+92). */
       state.fbName = LS.get('fbPageName', '') || '';
 
-      function googleClientId() { return (LS.get('googleClientId', '') || '').trim(); }
-      function firebaseCfg() {
-        return {
-          apiKey: (LS.get('firebaseApiKey', '') || '').trim(),
-          authDomain: (LS.get('firebaseAuthDomain', '') || '').trim(),
-          projectId: (LS.get('firebaseProjectId', '') || '').trim()
-        };
-      }
-      function firebaseConfigured() { var c = firebaseCfg(); return !!(c.apiKey && c.authDomain && c.projectId); }
-      function googleProfile() {
-        try { var p = JSON.parse(LS.get('googleProfile', '')); return p && (p.email || p.name) ? p : null; }
-        catch (e) { return null; }
-      }
-      function saveProfile(p) {
-        if (p) LS.set('googleProfile', JSON.stringify(p));
-        else { try { window.localStorage.removeItem('musechat.googleProfile'); } catch (e) {} }
+      var COUNTRIES = [
+        ['Pakistan', '+92'],
+        ['Afghanistan', '+93'], ['Albania', '+355'], ['Algeria', '+213'], ['Andorra', '+376'],
+        ['Angola', '+244'], ['Argentina', '+54'], ['Armenia', '+374'], ['Australia', '+61'],
+        ['Austria', '+43'], ['Azerbaijan', '+994'], ['Bahamas', '+1242'], ['Bahrain', '+973'],
+        ['Bangladesh', '+880'], ['Barbados', '+1246'], ['Belarus', '+375'], ['Belgium', '+32'],
+        ['Belize', '+501'], ['Benin', '+229'], ['Bermuda', '+1441'], ['Bhutan', '+975'],
+        ['Bolivia', '+591'], ['Bosnia & Herzegovina', '+387'], ['Botswana', '+267'], ['Brazil', '+55'],
+        ['Brunei', '+673'], ['Bulgaria', '+359'], ['Burkina Faso', '+226'], ['Burundi', '+257'],
+        ['Cambodia', '+855'], ['Cameroon', '+237'], ['Canada', '+1'], ['Cape Verde', '+238'],
+        ['Cayman Islands', '+1345'], ['Central African Republic', '+236'], ['Chad', '+235'], ['Chile', '+56'],
+        ['China', '+86'], ['Colombia', '+57'], ['Comoros', '+269'], ['Congo', '+242'],
+        ['Congo (DRC)', '+243'], ['Costa Rica', '+506'], ['Croatia', '+385'], ['Cuba', '+53'],
+        ['Cyprus', '+357'], ['Czech Republic', '+420'], ['Denmark', '+45'], ['Djibouti', '+253'],
+        ['Dominica', '+1767'], ['Dominican Republic', '+1809'], ['Ecuador', '+593'], ['Egypt', '+20'],
+        ['El Salvador', '+503'], ['Equatorial Guinea', '+240'], ['Eritrea', '+291'], ['Estonia', '+372'],
+        ['Eswatini', '+268'], ['Ethiopia', '+251'], ['Fiji', '+679'], ['Finland', '+358'],
+        ['France', '+33'], ['Gabon', '+241'], ['Gambia', '+220'], ['Georgia', '+995'],
+        ['Germany', '+49'], ['Ghana', '+233'], ['Gibraltar', '+350'], ['Greece', '+30'],
+        ['Greenland', '+299'], ['Grenada', '+1473'], ['Guam', '+1671'], ['Guatemala', '+502'],
+        ['Guinea', '+224'], ['Guinea-Bissau', '+245'], ['Guyana', '+592'], ['Haiti', '+509'],
+        ['Honduras', '+504'], ['Hong Kong', '+852'], ['Hungary', '+36'], ['Iceland', '+354'],
+        ['India', '+91'], ['Indonesia', '+62'], ['Iran', '+98'], ['Iraq', '+964'],
+        ['Ireland', '+353'], ['Israel', '+972'], ['Italy', '+39'], ['Ivory Coast', '+225'],
+        ['Jamaica', '+1876'], ['Japan', '+81'], ['Jordan', '+962'], ['Kazakhstan', '+7'],
+        ['Kenya', '+254'], ['Kiribati', '+686'], ['Kuwait', '+965'], ['Kyrgyzstan', '+996'],
+        ['Laos', '+856'], ['Latvia', '+371'], ['Lebanon', '+961'], ['Lesotho', '+266'],
+        ['Liberia', '+231'], ['Libya', '+218'], ['Liechtenstein', '+423'], ['Lithuania', '+370'],
+        ['Luxembourg', '+352'], ['Macau', '+853'], ['Madagascar', '+261'], ['Malawi', '+265'],
+        ['Malaysia', '+60'], ['Maldives', '+960'], ['Mali', '+223'], ['Malta', '+356'],
+        ['Mauritania', '+222'], ['Mauritius', '+230'], ['Mexico', '+52'], ['Micronesia', '+691'],
+        ['Moldova', '+373'], ['Monaco', '+377'], ['Mongolia', '+976'], ['Montenegro', '+382'],
+        ['Morocco', '+212'], ['Mozambique', '+258'], ['Myanmar', '+95'], ['Namibia', '+264'],
+        ['Nepal', '+977'], ['Netherlands', '+31'], ['New Zealand', '+64'], ['Nicaragua', '+505'],
+        ['Niger', '+227'], ['Nigeria', '+234'], ['North Korea', '+850'], ['North Macedonia', '+389'],
+        ['Norway', '+47'], ['Oman', '+968'], ['Palestine', '+970'], ['Panama', '+507'],
+        ['Papua New Guinea', '+675'], ['Paraguay', '+595'], ['Peru', '+51'], ['Philippines', '+63'],
+        ['Poland', '+48'], ['Portugal', '+351'], ['Puerto Rico', '+1787'], ['Qatar', '+974'],
+        ['Romania', '+40'], ['Russia', '+7'], ['Rwanda', '+250'], ['Samoa', '+685'],
+        ['San Marino', '+378'], ['Sao Tome & Principe', '+239'], ['Saudi Arabia', '+966'], ['Senegal', '+221'],
+        ['Serbia', '+381'], ['Seychelles', '+248'], ['Sierra Leone', '+232'], ['Singapore', '+65'],
+        ['Slovakia', '+421'], ['Slovenia', '+386'], ['Solomon Islands', '+677'], ['Somalia', '+252'],
+        ['South Africa', '+27'], ['South Korea', '+82'], ['South Sudan', '+211'], ['Spain', '+34'],
+        ['Sri Lanka', '+94'], ['St. Kitts & Nevis', '+1869'], ['St. Lucia', '+1758'], ['Sudan', '+249'],
+        ['Suriname', '+597'], ['Sweden', '+46'], ['Switzerland', '+41'], ['Syria', '+963'],
+        ['Taiwan', '+886'], ['Tajikistan', '+992'], ['Tanzania', '+255'], ['Thailand', '+66'],
+        ['Timor-Leste', '+670'], ['Togo', '+228'], ['Tonga', '+676'], ['Trinidad & Tobago', '+1868'],
+        ['Tunisia', '+216'], ['Turkey', '+90'], ['Turkmenistan', '+993'], ['Uganda', '+256'],
+        ['Ukraine', '+380'], ['United Arab Emirates', '+971'], ['United Kingdom', '+44'], ['United States', '+1'],
+        ['Uruguay', '+598'], ['Uzbekistan', '+998'], ['Vanuatu', '+678'], ['Venezuela', '+58'],
+        ['Vietnam', '+84'], ['Yemen', '+967'], ['Zambia', '+260'], ['Zimbabwe', '+263']
+      ];
+
+      function phoneNumber() { return (LS.get('phoneNumber', '') || '').trim(); }
+      function isGuest() { return LS.get('guestMode', '') === '1'; }
+      function hasSession() { return !!phoneNumber() || isGuest(); }
+      /* Cloud sync (Firebase) hata di gayi hai — purani call sites ke liye no-op */
+      function schedulePush() {}
+
+      function buildCountryOptions() {
+        var sel = $('phoneCc');
+        if (!sel || sel.options.length) return;
+        COUNTRIES.forEach(function (c) {
+          var o = document.createElement('option');
+          o.value = c[1];
+          o.textContent = c[0] + ' (' + c[1] + ')';
+          sel.appendChild(o);
+        });
+        sel.value = '+92';
       }
 
-      /* ----- Cloud Sync (sirf chats, settings, account naam — tokens kabhi nahi) ----- */
-      function setSyncStatus(msg, kind) { setStatus($('syncStatus'), msg, kind); }
-      function updateSyncStatus() {
-        // Saaf UI: sync ki haalat ka koi mustaqil banner nahi — sirf asal
-        // masla (SDK fail / offline) dikhta hai; baqi haalat khamosh rehti hai.
-        if (!firebaseConfigured()) { setSyncStatus('', ''); return; }
-        if (typeof firebase === 'undefined') { setSyncStatus('Firebase SDK load nahi ho saka — internet check karo. App offline mode mein chal raha hai.', 'bad'); return; }
-        if (fbUser && !navigator.onLine) { setSyncStatus('Offline ho — internet aate hi sync ho jaye ga.', 'info'); return; }
-        setSyncStatus('', '');
-      }
-      function syncPayload() {
-        var names = [];
-        getAccounts().forEach(function (a) {
-          if (a.pageName) names.push(a.pageName);
-          if (a.ig && a.ig.username) names.push('@' + a.ig.username);
-        });
-        return {
-          chats: state.history.slice(-100),
-          settings: { posting: postingOn() ? '1' : '0' },
-          accountNames: names,
-          updatedAt: Date.now()
-        };
-      }
-      function pushSync() {
-        if (!fbUser || !fbDb) return;
-        var payload = syncPayload();
-        fbDb.collection('users').doc(fbUser.uid).set(payload, { merge: true })
-          .then(function () { LS.set('syncUpdatedAt', String(payload.updatedAt)); updateSyncStatus(); })
-          .catch(function () { setSyncStatus('Sync nahi ho saka — internet ya Firestore rules check karo.', 'bad'); });
-      }
-      function schedulePush() {
-        if (!fbUser || !fbDb) return;
-        if (pushTimer) clearTimeout(pushTimer);
-        pushTimer = setTimeout(pushSync, 900);
-      }
-      function renderHistory() {
-        chatScroll.innerHTML = '';
-        state.history.forEach(function (m) {
-          if (m.role === 'user') addUserMsg(m.text); else addAiMsg(m.text);
-        });
-        scrollChat();
-      }
-      function applyRemote(d) {
-        if (d.settings && typeof d.settings.posting !== 'undefined') setPosting(d.settings.posting === '1' || d.settings.posting === true);
-        if (d.accountNames && d.accountNames.length) {
-          state.fbName = d.accountNames[0];
-          LS.set('fbPageName', state.fbName);
-        }
-        if (Array.isArray(d.chats)) {
-          state.history = d.chats.filter(function (m) { return m && (m.role === 'user' || m.role === 'assistant') && typeof m.text === 'string'; });
-          renderHistory();
-        }
-        LS.set('syncUpdatedAt', String(d.updatedAt || Date.now()));
-        refreshChips();
-      }
-      function pullSync() {
-        if (!fbUser || !fbDb) return;
-        fbDb.collection('users').doc(fbUser.uid).get()
-          .then(function (snap) {
-            if (snap.exists) {
-              var d = snap.data();
-              var localTs = parseInt(LS.get('syncUpdatedAt', '0'), 10) || 0;
-              if ((d.updatedAt || 0) > localTs) { applyRemote(d); setSyncStatus('Synced ✓ — cloud se tumhara data is device pe aa gaya.', 'ok'); return; }
-            }
-            pushSync();
-          })
-          .catch(function () { updateSyncStatus(); });
-      }
-
-      /* ----- Google UI ----- */
-      var G_LOGO = '<svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" style="flex:none"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
-      function gHint(msg) {
-        var b = $('gSettingsHint'); if (b) b.textContent = msg || '';
-        var c = $('gLoginHint'); if (c) c.textContent = msg || '';
-      }
-      function renderGoogleUI() {
-        var p = googleProfile();
-        if (p) {
-          $('gProfile').hidden = false;
-          $('gProfileName').textContent = p.name || '';
-          $('gProfileEmail').textContent = p.email || '';
-          if (p.picture) $('gProfileImg').src = p.picture;
+      function renderAccountUI() {
+        var title = $('acctTitle'), sub = $('acctSub'), badge = $('acctBadge');
+        if (!title || !sub || !badge) return;
+        var num = phoneNumber();
+        if (num) {
+          title.textContent = num;
+          sub.textContent = 'Phone number se logged in ho — yahi is app mein tumhari pehchan hai.';
+          badge.textContent = 'LOGGED IN';
+        } else if (isGuest()) {
+          title.textContent = 'Guest mode';
+          sub.textContent = 'Tum guest ke tor pe andar ho. Phone se login karna ho to pehle log out karo.';
+          badge.textContent = 'GUEST';
         } else {
-          $('gProfile').hidden = true;
-        }
-        $('gSignOut').hidden = !p;
-        $('gSettingsWrap').style.display = p ? 'none' : '';
-        renderGoogleButtons();
-      }
-      function gPlaceholder(c, isGate) {
-        var b = document.createElement('button');
-        b.type = 'button'; b.className = 'btn btn-ghost';
-        b.innerHTML = G_LOGO + '<span>Continue with Google</span>';
-        b.style.gap = '10px';
-        b.addEventListener('click', function () {
-          if (isGate) {
-            var h = $('gLoginHint');
-            if (h) h.textContent = 'Google sign-in abhi setup nahi hua. Neeche “Continue as Guest” se andar jao, phir Settings → Google Account mein apna Google Client ID dal do — uske baad yahan se seedha Gmail se sign in ho jaye ga.';
-            return;
-          }
-          showTab('settings');
-          setStatus($('gStatus'), 'Gmail sign-in abhi on nahi hai. Upar “Google Account” mein apna <b>Google Client ID</b> dalo — ya “Cloud Sync — Firebase” configure kar do, phir ye button kaam kare ga.', 'info');
-          var f = $('googleClientId'); if (f) f.focus();
-        });
-        c.appendChild(b);
-      }
-      function renderGoogleButtons() {
-        if (googleProfile()) return;
-        [['gSettings', 0], ['gLogin', 1]].forEach(function (pair) {
-          var c = $(pair[0]);
-          if (!c) return;
-          c.innerHTML = '';
-          if (firebaseConfigured() && typeof firebase !== 'undefined' && fbAuth) {
-            var b = document.createElement('button');
-            b.type = 'button'; b.className = 'btn btn-ghost';
-            b.innerHTML = G_LOGO + '<span>Continue with Google</span>';
-            b.style.gap = '10px';
-            b.addEventListener('click', firebaseSignIn);
-            c.appendChild(b);
-          } else if (!firebaseConfigured() && gsiReady && googleClientId()) {
-            try {
-              window.google.accounts.id.renderButton(c, { theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill', width: Math.min(c.clientWidth || 300, 340) });
-            } catch (e) { gPlaceholder(c, pair[1]); }
-          } else {
-            gPlaceholder(c, pair[1]);
-          }
-        });
-        if (firebaseConfigured()) gHint('');
-        else if (!googleClientId()) gHint('Gmail sign-in on karne ke liye Settings mein Google Client ID dalo.');
-        else gHint('');
-      }
-
-      /* ----- Firebase Auth ----- */
-      function initFirebase() {
-        if (!firebaseConfigured() || typeof firebase === 'undefined') { updateSyncStatus(); return; }
-        if (fbAuth) return;
-        try {
-          if (!firebase.apps.length) firebase.initializeApp(firebaseCfg());
-          fbApp = firebase.app();
-          fbAuth = firebase.auth();
-          fbDb = firebase.firestore();
-          fbAuth.onAuthStateChanged(onFbAuthChanged);
-        } catch (e) {
-          setSyncStatus('Firebase config mein masla hai: ' + esc(e.message), 'bad');
-          return;
-        }
-        updateSyncStatus();
-        renderGoogleButtons();
-      }
-      function onFbAuthChanged(user) {
-        fbUser = user || null;
-        if (user) {
-          saveProfile({ name: user.displayName || '', email: user.email || '', picture: user.photoURL || '', uid: user.uid });
-          LS.set('authProvider', 'firebase');
-          renderGoogleUI();
-          maybeEnterApp();
-          pullSync();
-        } else if (LS.get('authProvider', '') === 'firebase') {
-          saveProfile(null);
-          LS.set('authProvider', '');
-          renderGoogleUI();
-          updateSyncStatus();
-        } else {
-          updateSyncStatus();
+          title.textContent = 'Logged in nahi ho';
+          sub.textContent = 'Phone number se login karo taake tumhari pehchan mehfooz rahe.';
+          badge.textContent = '—';
         }
       }
-      function firebaseSignIn() {
-        if (!fbAuth) initFirebase();
-        if (!fbAuth) { setStatus($('gStatus'), 'Firebase abhi tayyar nahi — config check karo ya page reload karo.', 'bad'); return; }
-        var provider = new firebase.auth.GoogleAuthProvider();
-        fbAuth.signInWithPopup(provider).catch(function (e) {
-          setStatus($('gStatus'), 'Sign-in nahi hua: ' + esc(e.message || e.code || 'error'), 'bad');
-        });
-      }
 
-      /* ----- Google Identity Services (jab Firebase na ho) ----- */
-      function decodeJwtPayload(t) {
-        try {
-          var part = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-          while (part.length % 4) part += '=';
-          var bin = atob(part);
-          var pct = '';
-          for (var i = 0; i < bin.length; i++) pct += '%' + ('0' + bin.charCodeAt(i).toString(16)).slice(-2);
-          return JSON.parse(decodeURIComponent(pct));
-        } catch (e) { return null; }
+      function doPhoneLogin() {
+        var cc = ($('phoneCc').value || '+92').trim();
+        var raw = ($('phoneNum').value || '').replace(/[^\d]/g, '').replace(/^0+/, '');
+        var hint = $('phoneHint');
+        function err(m) { hint.textContent = m; hint.style.color = 'var(--bad)'; $('phoneNum').focus(); }
+        if (!raw) { err('Pehle apna phone number likho.'); return; }
+        if (raw.length < 6) { err('Number bohat chhota hai — mukammal number likho, jaise 3001234567.'); return; }
+        if ((cc + raw).replace('+', '').length > 15) { err('Number bohat lamba hai — dobara check karke likho.'); return; }
+        hint.textContent = '';
+        LS.set('phoneNumber', cc + raw);
+        LS.set('authProvider', 'phone');
+        try { window.localStorage.removeItem('musechat.guestMode'); } catch (e) {}
+        renderAccountUI();
+        enterApp();
       }
-      function onGsiCredential(resp) {
-        var payload = resp && resp.credential ? decodeJwtPayload(resp.credential) : null;
-        if (!payload) { setStatus($('gStatus'), 'Google sign-in se profile nahi mili. Dobara try karo.', 'bad'); return; }
-        saveProfile({ name: payload.name || '', email: payload.email || '', picture: payload.picture || '' });
-        LS.set('authProvider', 'gsi');
-        renderGoogleUI();
-        maybeEnterApp();
-        setStatus($('gStatus'), 'Sign in ho gaya — khush aamdeed, <b>' + esc(payload.name || '') + '</b>!', 'ok');
-      }
-      function initGsi() {
-        if (firebaseConfigured() || !googleClientId() || googleProfile()) return;
-        if (window.google && window.google.accounts && window.google.accounts.id) {
-          try {
-            window.google.accounts.id.initialize({ client_id: googleClientId(), callback: onGsiCredential });
-            gsiReady = true;
-            renderGoogleButtons();
-          } catch (e) {}
-        } else if (gsiTries++ < 20) setTimeout(initGsi, 300);
-        else gHint('Google sign-in load nahi ho saka — internet check karke page reload karo.');
-      }
-
-      /* ----- Settings wiring: Google + Firebase fields ----- */
-      var gcidEl = $('googleClientId');
-      gcidEl.value = googleClientId();
-      gcidEl.addEventListener('change', function () {
-        LS.set('googleClientId', gcidEl.value.trim());
-        gsiReady = false; gsiTries = 0;
-        initGsi(); renderGoogleUI();
-        setStatus($('gStatus'), 'Client ID save ho gaya.', 'ok');
-      });
-      ['firebaseApiKey', 'firebaseAuthDomain', 'firebaseProjectId'].forEach(function (id) {
-        var el = $(id);
-        el.value = LS.get(id, '');
-        el.addEventListener('change', function () {
-          LS.set(id, el.value.trim());
-          if (!fbAuth) { initFirebase(); }
-          else setSyncStatus('Config badal gaya hai — naya config lagane ke liye app reload karo.', 'info');
-          renderGoogleButtons();
-        });
-      });
-      /* Fallback model keys (Groq / Gemini) — sirf is device pe save hoti hain */
-      ['groqKey', 'geminiKey'].forEach(function (id) {
-        var el = $(id);
-        el.value = LS.get(id, '');
-        el.addEventListener('change', function () {
-          LS.set(id, el.value.trim());
-          setStatus($('aiKeyStatus'), el.value.trim() ? 'Key save ho gayi — ab ye model agent ke fallback ke tor pe ready hai.' : 'Key hata di gayi.', 'ok');
-        });
-      });
-      $('gSignOut').addEventListener('click', function () {
-        if (fbAuth && fbUser) fbAuth.signOut().catch(function () {});
-        if (window.google && window.google.accounts && window.google.accounts.id) { try { window.google.accounts.id.disableAutoSelect(); } catch (e) {} }
-        saveProfile(null);
-        LS.set('authProvider', '');
-        fbUser = null;
-        renderGoogleUI(); updateSyncStatus();
-        setStatus($('gStatus'), 'Sign out ho gaya.', 'ok');
-      });
-      $('syncNowBtn').addEventListener('click', function () {
-        if (!firebaseConfigured()) { setSyncStatus('Pehle Firebase config dalo (apiKey, authDomain, projectId) — phir sync hoga.', 'bad'); return; }
-        if (!fbUser) { setSyncStatus('Pehle Google se sign in karo — sync sign-in ke baad khud hota hai.', 'info'); return; }
-        setSyncStatus('Sync ho raha hai…', 'info');
-        pullSync();
-      });
-      window.addEventListener('online', function () { updateSyncStatus(); schedulePush(); });
-      window.addEventListener('offline', updateSyncStatus);
+      var phoneForm = $('phoneForm');
+      if (phoneForm) phoneForm.addEventListener('submit', function (e) { e.preventDefault(); doPhoneLogin(); });
 
       /* ----- Entry flow: Splash (1.5s) -> Login gate -> App ----- */
       var gateShown = false;
-      function hasSession() { return !!googleProfile() || LS.get('guestMode', '') === '1'; }
       function enterApp() {
         var g = $('gate');
         gateShown = false;
@@ -2336,7 +2130,6 @@
       function showGate() {
         var g = $('gate');
         if (!g) return;
-        renderGoogleButtons();
         g.hidden = false;
         gateShown = true;
         requestAnimationFrame(function () { requestAnimationFrame(function () { g.classList.add('show'); }); });
@@ -2354,25 +2147,20 @@
       }
       $('guestBtn').addEventListener('click', function () {
         LS.set('guestMode', '1');
+        renderAccountUI();
         enterApp();
       });
       $('logoutBtn').addEventListener('click', function () {
-        if (fbAuth && fbUser) fbAuth.signOut().catch(function () {});
-        if (window.google && window.google.accounts && window.google.accounts.id) { try { window.google.accounts.id.disableAutoSelect(); } catch (e) {} }
-        saveProfile(null);
+        try { window.localStorage.removeItem('musechat.phoneNumber'); } catch (e) {}
         try { window.localStorage.removeItem('musechat.guestMode'); } catch (e) {}
         LS.set('authProvider', '');
-        fbUser = null;
-        renderGoogleUI();
-        updateSyncStatus();
+        renderAccountUI();
         showGate();
       });
 
       /* ----- init ----- */
-      initFirebase();
-      initGsi();
-      renderGoogleUI();
-      updateSyncStatus();
+      buildCountryOptions();
+      renderAccountUI();
       renderFbAccounts();
       renderIgAccounts();
       updateIgPostHint();

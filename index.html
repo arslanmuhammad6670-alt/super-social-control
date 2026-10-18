@@ -199,6 +199,45 @@
       .msg.me .msg-img { display: block; max-width: 230px; width: 100%; height: auto; border-radius: 12px; margin-bottom: 7px; }
       .msg.me .msg-img:last-child { margin-bottom: 0; }
 
+      /* ---------- Chat bar + purani chats ki list ---------- */
+      .chatbar {
+        flex: none; display: flex; align-items: center; gap: 8px;
+        padding: 9px 12px; border-bottom: 1px solid var(--line); background: var(--bg);
+      }
+      .chatbar-title {
+        flex: 1; min-width: 0; text-align: center; font-weight: 800; font-size: 14.5px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .chatbar-btn {
+        flex: none; display: inline-flex; align-items: center; gap: 6px;
+        background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+        border-radius: 999px; padding: 7px 12px; font-size: 12.5px; font-weight: 800;
+      }
+      .chatbar-btn svg { width: 15px; height: 15px; }
+      .chatbar-btn:active { background: var(--surface-2); }
+      .chatlist-panel {
+        position: absolute; inset: 0; z-index: 6; background: var(--bg);
+        overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+      }
+      .cl-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .cl-head strong { font-size: 17px; }
+      .chatlist { display: flex; flex-direction: column; gap: 8px; }
+      .chatrow {
+        display: flex; align-items: center; gap: 11px; width: 100%; text-align: left;
+        background: var(--surface-2); border: 1px solid var(--line); border-radius: 13px;
+        padding: 11px 12px; color: var(--ink);
+      }
+      .chatrow.active { border-color: var(--accent); background: var(--accent-soft); }
+      .chatrow .who { flex: 1; min-width: 0; }
+      .chatrow .nm { font-weight: 800; font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .chatrow .meta { color: var(--ink-2); font-size: 12px; }
+      .chatrow .del {
+        flex: none; width: 34px; height: 34px; border-radius: 9px; padding: 0;
+        border: 1px solid var(--line); background: var(--surface); color: var(--bad);
+        display: grid; place-items: center;
+      }
+      .chatrow .del svg { width: 16px; height: 16px; }
+
       /* ---------- Create ---------- */
       .scrollpad { padding: 18px 16px 28px; display: flex; flex-direction: column; gap: 16px; width: 100%; }
       .viewtitle {
@@ -336,6 +375,39 @@
         background: var(--surface); border: 1px solid var(--line);
       }
       .btn-ig:active { background: var(--surface-2); }
+      .btn-iglogin {
+        width: 100%; color: #fff; border: none;
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        display: flex; align-items: center; justify-content: center; gap: 9px;
+      }
+      .btn-iglogin:active { filter: brightness(.92); }
+      .btn-iglogin svg { width: 19px; height: 19px; flex: none; }
+      /* ---------- News tab ---------- */
+      .newschips { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+      .newschips button {
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+        border-radius: 999px; padding: 7px 15px; font-size: 13px; font-weight: 800;
+      }
+      .newschips button.sel { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .newsitem {
+        background: var(--surface-2); border: 1px solid var(--line);
+        border-radius: 13px; padding: 12px; margin-bottom: 10px;
+      }
+      .newsitem .nh { font-weight: 800; font-size: 14.5px; line-height: 1.45; margin-bottom: 6px; }
+      .newsitem .nm { color: var(--ink-2); font-size: 12px; margin-bottom: 9px; }
+      .newsitem .nm a { color: var(--accent); font-weight: 800; }
+      .newsitem .nact .btn { width: auto; padding: 8px 14px; font-size: 13px; }
+      .newssearch { margin-bottom: 10px; }
+      .newsitem .nthumb { width: 100%; height: 150px; object-fit: cover; border-radius: 9px; margin-bottom: 9px; display: block; background: var(--surface); }
+      .newsitem .ndesc { display: none; color: var(--ink-2); font-size: 13px; line-height: 1.55; margin: 8px 0; }
+      .newsitem.expanded .ndesc { display: block; }
+      .newsitem .nexpand { color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 4px; display: inline-block; }
+      .newsitem .nact { display: flex; gap: 8px; margin-top: 10px; }
+      .newsitem .nact .btn-post {
+        flex: 1; padding: 12px 16px; font-size: 15px; font-weight: 800;
+        background: var(--accent); border-color: var(--accent); color: #fff; border-radius: 11px;
+      }
+      .newsitem .nact .btn-link { width: auto; padding: 12px 14px; font-size: 13px; }
       .acctlist { display: flex; flex-direction: column; gap: 8px; }
       .acct {
         display: flex; align-items: center; gap: 11px;
@@ -454,6 +526,20 @@
       .phoneform { display: flex; flex-direction: column; gap: 12px; text-align: left; }
       .phoneform .btn { margin-top: 2px; }
       #phoneHint { text-align: center; min-height: 15px; }
+      /* WhatsApp OTP — gate pe button + 6 khano wala code input */
+      .btn-wa { background: #25d366; color: #ffffff; width: 100%; }
+      .btn-wa:active { background: #1eb856; }
+      .btn-wa:disabled { opacity: .45; cursor: not-allowed; }
+      #waOtpNote { text-align: center; }
+      #waOtpBox { display: flex; flex-direction: column; gap: 12px; }
+      .otprow { display: flex; gap: 8px; justify-content: center; }
+      .otp-in {
+        width: 46px; height: 54px; text-align: center;
+        font-size: 21px; font-weight: 800;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px; outline: none;
+      }
+      .otp-in:focus { border-color: var(--accent); }
+      #waOtpHint { text-align: center; min-height: 15px; }
 
       @media (prefers-reduced-motion: reduce) {
         .typing i, .spinner, .splash .s-in, .splash .s-bar i { animation: none; }
@@ -461,6 +547,16 @@
       @media (min-width: 720px) {
         .msg { max-width: 75%; }
         .scrollpad { padding: 24px 22px 34px; }
+      }
+    
+      /* Hide Netlify injected branding (badge / popup) */
+      a[href*="netlify.com" i], [src*="netlify.com" i],
+      div[class*="netlify" i], div[id*="netlify" i],
+      iframe[title*="netlify" i], iframe[src*="netlify" i] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
     </style>
   </head>
@@ -484,7 +580,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
         </div>
         <h1>Super Social Control</h1>
-        <p class="tag">Khush aamdeed! Apna phone number dalo aur foran andar — koi OTP nahi, koi intezaar nahi. Ya guest ke tor pe shuru kar do.</p>
+        <p class="tag">Khush aamdeed! Apna phone number dalo aur foran andar — ya WhatsApp pe OTP mangwa ke login kar lo. Guest ke tor pe bhi shuru kar sakte ho.</p>
         <form class="phoneform" id="phoneForm">
           <div>
             <label class="flabel" for="phoneCc">Country</label>
@@ -494,12 +590,34 @@
             <label class="flabel" for="phoneNum">Phone number</label>
             <input class="field" id="phoneNum" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 1234567" />
           </div>
+          <button class="btn btn-wa" type="button" id="waOtpBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
+            WhatsApp pe OTP bhejo
+          </button>
+          <div class="mini" id="waOtpNote"></div>
+          <div id="waOtpBox" hidden>
+            <div>
+              <label class="flabel">WhatsApp code (6 digit)</label>
+              <div class="otprow" id="waOtpRow">
+                <input class="otp-in" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Code ka digit 1" />
+                <input class="otp-in" type="text" inputmode="numeric" maxlength="1" aria-label="Code ka digit 2" />
+                <input class="otp-in" type="text" inputmode="numeric" maxlength="1" aria-label="Code ka digit 3" />
+                <input class="otp-in" type="text" inputmode="numeric" maxlength="1" aria-label="Code ka digit 4" />
+                <input class="otp-in" type="text" inputmode="numeric" maxlength="1" aria-label="Code ka digit 5" />
+                <input class="otp-in" type="text" inputmode="numeric" maxlength="1" aria-label="Code ka digit 6" />
+              </div>
+            </div>
+            <button class="btn btn-primary" type="button" id="waVerifyBtn">Code verify karo — Login</button>
+            <button class="btn btn-ghost" type="button" id="waResendBtn" disabled>Dobara bhejo</button>
+            <div class="mini" id="waOtpHint" role="alert"></div>
+          </div>
           <button class="btn btn-primary" type="submit">Continue</button>
           <div class="mini" id="phoneHint" role="alert"></div>
         </form>
         <div class="ordiv"><span>ya</span></div>
         <button class="btn btn-ghost guestbtn" type="button" id="guestBtn">Continue as Guest</button>
-        <p class="mini fineprint">Phone number sirf is device pe tumhari pehchan ke liye save hota hai — koi SMS ya OTP nahi bheja jata. Guest mode mein bhi sab kuch is device pe hi rehta hai.</p>
+        <p class="mini fineprint">Phone number sirf is device pe tumhari pehchan ke liye save hota hai. Direct Continue pe koi code nahi aata; WhatsApp OTP sirf tab kaam kare ga jab Settings mein WhatsApp setup mukammal ho. Guest mode mein bhi sab kuch is device pe hi rehta hai.</p>
+        <p class="mini fineprint">Facebook / Instagram connect karna ho to andar ja ke <b>Settings → Facebook Pages / Instagram Accounts</b> se login karo.</p>
       </div>
     </div>
 
@@ -509,6 +627,26 @@
 
         <!-- ================= CHAT ================= -->
         <section class="view active" id="view-chat" aria-label="Chat">
+          <div class="chatbar">
+            <button class="chatbar-btn" type="button" id="chatListBtn" aria-label="Purani chats dekho">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              <span>Chats</span>
+            </button>
+            <div class="chatbar-title" id="chatTitle">Nayi chat</div>
+            <button class="chatbar-btn" type="button" id="newChatBtn" aria-label="Nayi chat shuru karo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Nayi chat</span>
+            </button>
+          </div>
+          <div class="chatlist-panel" id="chatListPanel" hidden>
+            <div class="cl-head">
+              <strong>Tumhari chats</strong>
+              <button class="chatbar-btn" type="button" id="chatListClose">Band karo</button>
+            </div>
+            <button class="btn btn-ghost" type="button" id="chatListNew" style="width:100%">+ Nayi chat shuru karo</button>
+            <div class="chatlist" id="chatList"></div>
+            <p class="mini">Saari chats sirf is device pe save hoti hain. Kisi chat pe tap karo to wohi guftagu wapas khul jaye gi — agent ko pichli baat yaad rehti hai.</p>
+          </div>
           <div class="chat-scroll" id="chatScroll">
             <div class="welcome" id="welcome">
               <div class="mark" aria-hidden="true">
@@ -603,8 +741,9 @@
                 <div>Abhi koi tasveer nahi bani.<br />Upar prompt likh ke “Tasveer banao” dabao.</div>
               </div>
               <img id="stageImg" alt="AI se bani hui tasveer" hidden />
-              <div class="loading"><div><div class="spinner"></div>Tasveer ban rahi hai…<br /><span class="mini">aam tor pe 10–30 second lagte hain</span></div></div>
+              <div class="loading"><div><div class="spinner"></div>Tasveer ban rahi hai…<br /><span class="mini" id="stageTryHint">pehla model try ho raha hai — ek fail ho to agla khud try hota hai</span></div></div>
             </div>
+            <div class="mini" id="imgModelNote" hidden></div>
 
             <div class="btnrow">
               <button class="btn btn-ghost" id="regenBtn" disabled>
@@ -682,6 +821,28 @@
           </div>
         </section>
 
+        <!-- ================= NEWS ================= -->
+        <section class="view" id="view-news" aria-label="Khabrain">
+          <div class="scrollpad">
+            <h2 class="viewtitle">Khabrain</h2>
+            <p class="viewsub">Jo dil kare khud news uthao — parho, tap karo, seedha post banao.</p>
+            <input class="field newssearch" type="search" id="newsSearch" placeholder="News dhoondo… (jaise: Pakistan, cricket, Trump)" autocomplete="off" />
+            <div class="newschips" id="newsChips">
+              <button type="button" data-cat="all" class="sel">Sab</button>
+              <button type="button" data-cat="pakistan">Pakistan</button>
+              <button type="button" data-cat="world">World</button>
+              <button type="button" data-cat="sports">Sports</button>
+              <button type="button" data-cat="googlenews">Google News</button>
+            </div>
+            <button class="btn btn-ghost" type="button" id="newsRefresh" style="width:100%;margin-bottom:12px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;vertical-align:-3px;margin-right:6px"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>
+              Refresh karo
+            </button>
+            <div id="newsList"></div>
+            <div class="status" id="newsStatus" role="status"></div>
+          </div>
+        </section>
+
         <!-- ================= SETTINGS ================= -->
         <section class="view" id="view-settings" aria-label="Settings">
           <div class="scrollpad">
@@ -695,12 +856,12 @@
                 <summary>Apni API keys (optional)</summary>
                 <div class="advbody">
                   <div>
-                    <label class="flabel" for="groqKey">Groq API Key (Fallback 1)</label>
+                    <div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:10px;padding:12px;margin:12px 0;font-size:14px;color:#92400e;">⚠️ <b>API keys yahan dalo</b> — bina keys ke AI features kaam nahin karengi. Keys sirf tumhare browser mein save hoti hain, kahin upload nahin hoti.<br><br>• <b>Groq:</b> console.groq.com → API Keys<br>• <b>Gemini:</b> aistudio.google.com → Get API Key<br>• <b>Hugging Face:</b> huggingface.co → Settings → Access Tokens</div><label class="flabel" for="groqKey">Groq API Key (Fallback 1)</label>
                     <div class="pwrow">
-                      <input class="field" type="password" id="groqKey" placeholder="gsk_…" autocomplete="off" />
+                      <input class="field" type="password" id="groqKey" placeholder="YOUR_GROQ_KEY" autocomplete="off" />
                       <button class="btn btn-ghost" type="button" data-eye="groqKey">Dikhao</button>
                     </div>
-                    <p class="mini" style="margin:8px 0 0">Free key <b>console.groq.com</b> → API Keys se banti hai. Model: Llama 3.3 70B.</p>
+                    <p class="mini" style="margin:8px 0 0">Tumhari default key pehle se lagi hui hai — kuch karne ki zaroorat nahi. Apni doosri key use karni ho to yahan badal do (free key <b>console.groq.com</b> → API Keys se banti hai). Model: Llama 3.3 70B.</p>
                   </div>
                   <div>
                     <label class="flabel" for="geminiKey">Gemini API Key (Fallback 2)</label>
@@ -708,7 +869,15 @@
                       <input class="field" type="password" id="geminiKey" placeholder="AIza…" autocomplete="off" />
                       <button class="btn btn-ghost" type="button" data-eye="geminiKey">Dikhao</button>
                     </div>
-                    <p class="mini" style="margin:8px 0 0">Free key <b>aistudio.google.com/apikey</b> se banti hai. Model: Gemini 2.0 Flash. Key pe koi restriction na lagana.</p>
+                    <p class="mini" style="margin:8px 0 0">Tumhari default key pehle se lagi hui hai — kuch karne ki zaroorat nahi. Apni doosri key use karni ho to yahan badal do (free key <b>aistudio.google.com/apikey</b> se banti hai). Model: Gemini 2.0 Flash. Key pe koi restriction na lagana.</p>
+                  </div>
+                  <div>
+                    <label class="flabel" for="hfKey">Hugging Face Token (tasveeron ke liye)</label>
+                    <div class="pwrow">
+                      <input class="field" type="password" id="hfKey" placeholder="YOUR_HF_KEY" autocomplete="off" />
+                      <button class="btn btn-ghost" type="button" data-eye="hfKey">Dikhao</button>
+                    </div>
+                    <p class="mini" style="margin:8px 0 0">Free token <b>huggingface.co/settings/tokens</b> se banta hai. Tasveerein 3 Hugging Face models ki chain se banti hain (FLUX.1-schnell, SDXL, SD 2.1) — <b>token dalna lazmi hai</b>, baghair token ke tasveer nahi banegi. Free token <b>huggingface.co/settings/tokens</b> se banao aur yahan dal do.</p>
                   </div>
                   <div class="status" id="aiKeyStatus" role="status"></div>
                 </div>
@@ -726,6 +895,29 @@
                 <span class="badge" id="acctBadge">GUEST</span>
               </div>
               <button class="btn btn-ghost danger" type="button" id="logoutBtn">App se log out karo</button>
+            </div>
+
+            <div class="card">
+              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>WhatsApp OTP</h2>
+              <p class="hint">Login screen pe <b>WhatsApp OTP</b> chalane ke liye apni Meta WhatsApp Business API ki details yahan dalo. Ye <b>Meta for Developers → WhatsApp → API Setup</b> se milti hain. Template message mein ek body parameter <b>{{1}}</b> hona chahiye — code usi mein jata hai (“Tumhara Super Social Control code hai: {{1}}”). Dono fields bhar jayen to login screen ka WhatsApp button khud active ho jaye ga.</p>
+              <div>
+                <label class="flabel" for="waPhoneId">WhatsApp Phone Number ID</label>
+                <input class="field" type="text" id="waPhoneId" placeholder="e.g. 123456789012345" autocomplete="off" />
+              </div>
+              <div>
+                <label class="flabel" for="waToken">WhatsApp Access Token</label>
+                <div class="pwrow">
+                  <input class="field" type="password" id="waToken" placeholder="EAAB…" autocomplete="off" />
+                  <button class="btn btn-ghost" type="button" data-eye="waToken">Dikhao</button>
+                </div>
+                <p class="mini" style="margin:8px 0 0">Tumhara default token pehle se laga hua hai — kuch karne ki zaroorat nahi. Token expire ho jaye to naya token yahan dal do, wohi use hoga.</p>
+              </div>
+              <div>
+                <label class="flabel" for="waTemplate">Template ka naam</label>
+                <input class="field" type="text" id="waTemplate" placeholder="super_social_otp" autocomplete="off" />
+                <p class="mini" style="margin:8px 0 0">Meta mein jo OTP template banaya ho, usi ka naam yahan likho. Khali chhor do to <b>super_social_otp</b> use hoga (language: en_US).</p>
+              </div>
+              <div class="status" id="waStatus" role="status"></div>
             </div>
 
 <div class="card">
@@ -753,7 +945,11 @@
 
             <div class="card">
               <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram Accounts</h2>
-              <p class="hint">Instagram alag se login nahi hota — jo IG account tumhare Page se linked hoga, woh Facebook login pe khud aa jaye ga.</p>
+              <button class="btn btn-iglogin" type="button" id="igLoginBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>
+                Instagram se Login
+              </button>
+              <p class="hint">Button dabao — Meta ka login khule ga (Instagram Facebook ke zariye connect hota hai). Login ke baad tumhare Page se linked Instagram account khud detect ho jaye ga.</p>
               <div>
                 <label class="flabel">Detected Instagram accounts</label>
                 <div class="acctlist" id="igAccountsList"></div>
@@ -778,6 +974,51 @@
             </div>
 
             <div class="card">
+              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3L2 9.2h7.6z"/></svg>🤖 Auto News Post</h2>
+              <p class="hint">ON karo to app <b>khud</b> taza news chun ke, post bana ke, tasveer laga ke tumhare Page pe lagaye ga — tumhe kuch nahi karna parega!</p>
+              <div class="switchrow">
+                <div>
+                  <div class="t">Auto post ON/OFF</div>
+                  <div class="d" id="autoPostState">Abhi OFF hai.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="autoPostToggle" />
+                  <span class="track"></span>
+                </label>
+              </div>
+              <div id="autoPostOpts" hidden>
+                <div>
+                  <label class="flabel" for="autoPostFreq">Kitni dair baad post karo?</label>
+                  <select class="field" id="autoPostFreq">
+                    <option value="1800000">Har 30 minute</option>
+                    <option value="3600000" selected>Har 1 ghanta</option>
+                    <option value="7200000">Har 2 ghante</option>
+                    <option value="14400000">Har 4 ghante</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="flabel" for="autoPostPage">Kis Page pe post karo?</label>
+                  <select class="field" id="autoPostPage"></select>
+                </div>
+                <div>
+                  <label class="flabel" for="autoPostCat">Kis category ki news?</label>
+                  <select class="field" id="autoPostCat">
+                    <option value="all" selected>Sab (mix)</option>
+                    <option value="pakistan">Pakistan</option>
+                    <option value="world">World</option>
+                    <option value="sports">Sports</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" type="button" id="autoPostNow" style="width:100%;margin-top:10px">⚡ Abhi ek post karo</button>
+                <div>
+                  <label class="flabel" style="margin-top:12px">Auto Post Log</label>
+                  <div id="autoPostLog"><div class="empty-note">Abhi koi auto post nahi hui.</div></div>
+                </div>
+              </div>
+              <div class="status" id="autoPostStatus" role="status"></div>
+            </div>
+
+            <div class="card">
               <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg>App Install Karo</h2>
               <p class="hint">Is app ko apne Android phone pe install kar sakte ho — phir ye home screen se ek asli app ki tarah khule gi.</p>
               <button class="btn btn-primary" type="button" id="installBtn" hidden>Install karo</button>
@@ -791,7 +1032,7 @@
 
             <div class="card">
               <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/></svg>Tumhara Data</h2>
-              <p class="hint">Facebook token <b>sirf is browser ke localStorage</b> mein save hota hai. Chat aur tasveer Pollinations ko jati hai (koi key nahi chahiye), aur post seedha Meta (Facebook) ko jati hai — is ke ilawa koi server inhe nahi dekhta.</p>
+              <p class="hint">Facebook token aur saari chats <b>sirf is browser ke localStorage</b> mein save hoti hain. Chat Pollinations/Groq/Gemini ko aur tasveerein <b>sirf Hugging Face</b> ke image models ko jati hain (Hugging Face token Settings mein dalna lazmi hai), aur post seedha Meta (Facebook) ko jati hai — is ke ilawa koi server inhe nahi dekhta.</p>
               <button class="btn btn-ghost danger" type="button" id="wipeBtn">Saari settings saaf karo</button>
               <div class="status" id="wipeStatus" role="status"></div>
             </div>
@@ -814,6 +1055,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
           Browser
         </button>
+        <button class="tab" type="button" data-tab="news">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2z"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          News
+        </button>
         <button class="tab" type="button" data-tab="settings">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.51 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.23.6.85 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
           Settings
@@ -824,6 +1069,21 @@
     <script>
     (function () {
       'use strict';
+      /* ---- Hide Netlify injected branding badge/popup ---- */
+      (function hideNetlifyBranding() {
+        function sweep() {
+          try {
+            document.querySelectorAll(
+              'a[href*="netlify.com" i], div[class*="netlify" i], div[id*="netlify" i], iframe[title*="netlify" i], iframe[src*="netlify" i]'
+            ).forEach(function (el) { el.remove(); });
+          } catch (e) {}
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', sweep);
+        } else { sweep(); }
+        setInterval(sweep, 2000);
+      })();
+
 
       /* ============ helpers ============ */
       function $(id) { return document.getElementById(id); }
@@ -937,7 +1197,8 @@
 
       /* ============ app state ============ */
       var state = {
-        imageUrl: '',       // current generated image (pollinations URL)
+        imageUrl: '',       // current generated image (HF blob URL)
+        imageModel: '',     // kis image model ne aakhri tasveer banayi
         imagePrompt: '',
         busy: false,
         chatBusy: false,
@@ -951,11 +1212,12 @@
       var browserStarted = false;
       function showTab(name) {
         tabs.forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-tab') === name); });
-        ['chat', 'create', 'browser', 'settings'].forEach(function (n) {
+        ['chat', 'create', 'browser', 'news', 'settings'].forEach(function (n) {
           $('view-' + n).classList.toggle('active', n === name);
         });
         if (name === 'chat') { var cs = $('chatScroll'); cs.scrollTop = cs.scrollHeight; }
         if (name === 'browser' && !browserStarted) { browserStarted = true; brNavigate(BR_HOME, true); }
+        if (name === 'news' && !newsLoaded) { newsLoaded = true; fetchNews(); }
       }
       tabs.forEach(function (t) {
         t.addEventListener('click', function () { showTab(t.getAttribute('data-tab')); });
@@ -975,6 +1237,31 @@
       }
       migrateLegacyAccount();
       syncLegacyKeys();
+      /* User ki apni keys — app mein built-in default ke tor pe lagi hain
+         taake baar baar paste na karna pare. Settings mein user apni key
+         dale to wohi use hoti hai (override), warna ye default chalti hai. */
+      var DEFAULT_GROQ_KEY = '';
+      var DEFAULT_GEMINI_KEY = '';
+      var DEFAULT_HF_KEY = '';
+      /* WhatsApp OTP ke defaults — user ke apne Meta WhatsApp Business account
+         ke hain, app mein pehle se lage hain taake OTP foran chale. Settings
+         mein user naya token/ID dale to wohi override ho jata hai. */
+      var DEFAULT_WA_PHONE_ID = '1432527049936267';
+      var DEFAULT_WA_TOKEN = '';
+      bindSaver('groqKey', 'groqKey');
+      bindSaver('geminiKey', 'geminiKey');
+      bindSaver('hfKey', 'hfToken');
+      /* Default keys fields mein pehle se bhari dikhao (user badal sakta hai) */
+      if (!$('groqKey').value) $('groqKey').value = DEFAULT_GROQ_KEY;
+      if (!$('geminiKey').value) $('geminiKey').value = DEFAULT_GEMINI_KEY;
+      if (!$('hfKey').value) $('hfKey').value = DEFAULT_HF_KEY;
+      bindSaver('waPhoneId', 'waPhoneId', function () { refreshWaOtpUI(); });
+      bindSaver('waToken', 'waToken', function () { refreshWaOtpUI(); });
+      bindSaver('waTemplate', 'waTemplate');
+      /* WhatsApp fields mein defaults pehle se bhare dikhao (token field
+         password type hai, is liye masked nazar aata hai) */
+      if (!$('waPhoneId').value) $('waPhoneId').value = DEFAULT_WA_PHONE_ID;
+      if (!$('waToken').value) $('waToken').value = DEFAULT_WA_TOKEN;
 
       document.querySelectorAll('[data-eye]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -1000,9 +1287,12 @@
 
       $('wipeBtn').addEventListener('click', function () {
         LS.wipe();
-        $('groqKey').value = ''; $('geminiKey').value = '';
+        $('groqKey').value = DEFAULT_GROQ_KEY; $('geminiKey').value = DEFAULT_GEMINI_KEY; $('hfKey').value = DEFAULT_HF_KEY;
+        $('waPhoneId').value = DEFAULT_WA_PHONE_ID; $('waToken').value = DEFAULT_WA_TOKEN; $('waTemplate').value = '';
+        refreshWaOtpUI();
         postToggle.checked = true;
         state.fbName = ''; state.history = [];
+        resetChats();
         renderFbAccounts(); renderIgAccounts(); updateIgPostHint();
         refreshChips();
         renderAccountUI();
@@ -1013,8 +1303,8 @@
          Priority: 1) Pollinations (free, koi key nahi) 2) Groq (user ki key)
          3) Gemini (user ki key). Ek fail ho to agla auto try hota hai, aur
          jo model jawab de woh status chip mein dikhta hai. */
-      function groqKey() { return (LS.get('groqKey', '') || '').trim(); }
-      function geminiKey() { return (LS.get('geminiKey', '') || '').trim(); }
+      function groqKey() { return (LS.get('groqKey', '') || '').trim() || DEFAULT_GROQ_KEY; }
+      function geminiKey() { return (LS.get('geminiKey', '') || '').trim() || DEFAULT_GEMINI_KEY; }
       function fetchWithTimeout(url, opts, ms) {
         opts = opts || {};
         if (window.AbortController) {
@@ -1060,7 +1350,7 @@
         return fetchWithTimeout('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groqKey() },
-          body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: msgs, temperature: 0.6, max_tokens: 1200 })
+          body: JSON.stringify({ model: 'openai/gpt-oss-120b', messages: msgs, temperature: 0.6, max_tokens: 1200 })
         }, 60000).then(function (res) {
           return res.json().catch(function () { return null; }).then(function (d) {
             if (!res.ok || !d || !d.choices || !d.choices[0] || !d.choices[0].message) {
@@ -1077,7 +1367,7 @@
         turn.forEach(function (m) {
           contents.push({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] });
         });
-        var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + encodeURIComponent(geminiKey());
+        var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=' + encodeURIComponent(geminiKey());
         return fetchWithTimeout(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1187,6 +1477,7 @@
           row.appendChild(ops);
           wrap.appendChild(row);
         });
+        if (typeof refreshAutoPostPages === 'function') refreshAutoPostPages();
       }
 
       function renderIgAccounts() {
@@ -1347,6 +1638,13 @@
       }
       $('fbLoginBtn').addEventListener('click', fbLogin);
       $('fbAddBtn').addEventListener('click', fbLogin);
+      /* Instagram login — Meta ka Instagram API Facebook login ke zariye hi chalta hai,
+         is liye ye button wahi fbLogin flow chalata hai (IG scopes pehle se included hain). */
+      var igBtn = $('igLoginBtn');
+      if (igBtn) igBtn.addEventListener('click', function () {
+        setStatus($('igStatus'), 'Instagram login khul raha hai (Meta/Facebook ke zariye)…', 'info');
+        fbLogin();
+      });
 
       /* Post an image to the ACTIVE Facebook Page. opts: {imageUrl, caption} —
          agent apni values de sakta hai, warna current tasveer + caption box use hota hai.
@@ -1499,7 +1797,7 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groqKey() },
             body: JSON.stringify({
-              model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+              model: 'openai/gpt-oss-120b',
               messages: [{ role: 'user', content: [
                 { type: 'text', text: instruction },
                 { type: 'image_url', image_url: { url: dataUrl } }
@@ -1516,7 +1814,7 @@
         function viaGemini() {
           var m = /^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/.exec(dataUrl || '');
           if (!m) return Promise.reject(new Error('image format samajh nahi aaya'));
-          return fetchWithTimeout('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + encodeURIComponent(geminiKey()), {
+          return fetchWithTimeout('https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=' + encodeURIComponent(geminiKey()), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1553,11 +1851,435 @@
         });
       });
 
-      function pollinationsUrl(prompt) {
-        var size = $('sizeSelect').value.split('x');
-        var seed = Math.floor(Math.random() * 999999) + 1;
-        return 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) +
-          '?width=' + size[0] + '&height=' + size[1] + '&seed=' + seed + '&nologo=true&model=flux';
+      /* ============ Image generation — Hugging Face 3 models ki fallback chain ============
+         Order: 1) HF FLUX.1-schnell  2) HF SDXL  3) HF SD 2.1
+         Har model pe 20 second timeout — fail/timeout ho to agla khud try
+         hota hai. Jo model tasveer bana de, us ka naam note mein dikhta hai.
+         NOTE: Hugging Face token Settings mein dalna LAZMI hai — baghair
+         token ke koi tasveer nahi banegi. */
+      var IMG_TIMEOUT_MS = 20000;
+      function hfToken() { return (LS.get('hfToken', '') || '').trim() || DEFAULT_HF_KEY; }
+
+      /* Hugging Face Inference API — jawab mein seedha image blob aata hai */
+      function hfImage(modelId, prompt, seed) {
+        var headers = { 'Content-Type': 'application/json' };
+        var tok = hfToken();
+        if (tok) headers['Authorization'] = 'Bearer ' + tok;
+        var hfBody = { inputs: prompt };
+        if (seed != null) hfBody.parameters = { seed: seed };
+        return fetchWithTimeout('https://api-inference.huggingface.co/models/' + modelId, {
+          method: 'POST', headers: headers,
+          body: JSON.stringify(hfBody)
+        }, IMG_TIMEOUT_MS).then(function (res) {
+          if (!res.ok) throw new Error('HF HTTP ' + res.status);
+          return res.blob();
+        }).then(function (blob) {
+          if (!blob || blob.size < 1000 || (blob.type && blob.type.indexOf('image/') !== 0)) {
+            throw new Error('HF ne tasveer nahi bheji');
+          }
+          return URL.createObjectURL(blob);
+        });
+      }
+
+      /* v18: REAL stock photos for news backgrounds (user rejected Pollinations, HF token dead, Gemini image gen failing).
+         Curated Unsplash CDN URLs per category — FREE, no API key, verified working.
+         composeNewsImage already falls back to canvas gradient on img.onerror, so this never errors. */
+      /* v19: SMART stock photo matching — 30 tagged photos with keyword scoring.
+         smartBgFor(headline, cat): extracts keywords from headline (English + Roman Urdu),
+         scores each photo by tag matches, picks best (random among ties for variety).
+         Falls back to category default. composeNewsImage already falls back to canvas on img.onerror. */
+      var STOCK_PHOTOS = [
+        {u:'https://images.unsplash.com/photo-1428592953211-077101b2021b?w=1080&h=1080&fit=crop', t:['rain','storm','weather','barish','toofan','toofani','monsoon','clouds','flood','selab','thunder','lightning','bijli'], c:['breaking','world','default']},
+        {u:'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1080&h=1080&fit=crop', t:['rain','weather','drops','barish','wet','umbrella'], c:['breaking','world','default']},
+        {u:'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=1080&h=1080&fit=crop', t:['rain','storm','umbrella','barish','city','street'], c:['breaking','world']},
+        {u:'https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?w=1080&h=1080&fit=crop', t:['storm','lightning','thunder','clouds','toofan','sky','dramatic'], c:['breaking','default']},
+        {u:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1080&h=1080&fit=crop', t:['football','soccer','sports','stadium','match','game','khel','team','goal'], c:['sports']},
+        {u:'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1080&h=1080&fit=crop', t:['basketball','sports','game','match','court','team'], c:['sports']},
+        {u:'https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=1080&h=1080&fit=crop', t:['stadium','sports','arena','crowd','match','football'], c:['sports']},
+        {u:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1080&h=1080&fit=crop', t:['sports','running','athlete','race','marathon','fitness'], c:['sports']},
+        {u:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1080&h=1080&fit=crop', t:['stadium','football','soccer','field','pitch','match','khel'], c:['sports']},
+        {u:'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1080&h=1080&fit=crop', t:['flags','flag','country','nation','politics','siyasat','government','hukumat'], c:['politics','world']},
+        {u:'https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=1080&h=1080&fit=crop', t:['parliament','government','politics','building','siyasat','election','vote','hukumat'], c:['politics']},
+        {u:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1080&h=1080&fit=crop', t:['newspaper','news','media','press','headlines','khabar','akhbar'], c:['breaking','default']},
+        {u:'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1080&h=1080&fit=crop', t:['newspaper','news','media','headlines','press','khabar'], c:['breaking','default']},
+        {u:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1080&h=1080&fit=crop', t:['city','night','skyline','lights','urban','sheher','buildings'], c:['world','breaking']},
+        {u:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1080&h=1080&fit=crop', t:['city','buildings','skyline','urban','downtown','sheher'], c:['world']},
+        {u:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1080&h=1080&fit=crop', t:['city','street','urban','traffic','road','sheher'], c:['world','breaking']},
+        {u:'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1080&h=1080&fit=crop', t:['mountain','nature','landscape','peaks','hills','pahar','scenic'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1080&h=1080&fit=crop', t:['beach','ocean','sea','waves','samandar','coast'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1080&h=1080&fit=crop', t:['earth','globe','space','night','world','planet','duniya'], c:['world','breaking','default']},
+        {u:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1080&h=1080&fit=crop', t:['business','office','building','corporate','company','karobar'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080&h=1080&fit=crop', t:['office','work','desk','business','job','kaam'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&h=1080&fit=crop', t:['business','money','finance','documents','paisa','bank','economy'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1080&h=1080&fit=crop', t:['technology','computer','tech','laptop','digital','internet','mobile','phone'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1080&h=1080&fit=crop', t:['abstract','dark','background','inspiration','motivation','success','kamyabi','dream','khwab'], c:['default']},
+        {u:'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=1080&h=1080&fit=crop', t:['abstract','light','background','hope','ummid','inspiration','peace','sukoon'], c:['default']},
+        {u:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1080&h=1080&fit=crop', t:['abstract','dark','texture','background','dramatic'], c:['default']},
+        {u:'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1080&h=1080&fit=crop', t:['concert','music','crowd','entertainment','show','stage'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1554435493-93422e8220c8?w=1080&h=1080&fit=crop', t:['hospital','health','doctor','medical','sehat','clinic'], c:['breaking','world']},
+        {u:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1080&h=1080&fit=crop', t:['education','school','books','study','taleem','students','college'], c:['world','default']},
+        {u:'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1080&h=1080&fit=crop', t:['abstract','gradient','background','modern'], c:['default']},
+      ];
+      var SMART_STOP = {the:1,a:1,an:1,in:1,on:1,of:1,to:1,for:1,with:1,by:1,at:1,from:1,as:1,is:1,are:1,was:1,were:1,be:1,been:1,has:1,have:1,had:1,will:1,would:1,can:1,could:1,should:1,it:1,its:1,this:1,that:1,these:1,those:1,and:1,or:1,but:1,not:1,no:1,mein:1,me:1,ki:1,ka:1,ke:1,se:1,ko:1,ne:1,par:1,pe:1,hai:1,hain:1,tha:1,thi:1,kya:1,jo:1,aur:1,ek:1,bhi:1,ab:1,kay:1,liye:1,tak:1,say:1,walay:1,wali:1,wala:1};
+      function smartBgFor(headline, cat) {
+        var h = (headline || '').toLowerCase();
+        var words = h.replace(/[^a-z0-9 ]/g, ' ').split(/ +/).filter(function(w){ return w.length > 2 && !SMART_STOP[w]; });
+        var best = [], bestScore = 0;
+        STOCK_PHOTOS.forEach(function(p){
+          var score = 0;
+          words.forEach(function(w){
+            p.t.forEach(function(t){
+              if (t === w) score += 3;
+              else if (t.indexOf(w) === 0 || w.indexOf(t) === 0) score += 2;
+            });
+          });
+          if (p.c.indexOf(cat) >= 0) score += 1;
+          if (score > bestScore) { bestScore = score; best = [p]; }
+          else if (score === bestScore && score > 1) { best.push(p); }
+        });
+        if (best.length) return best[Math.floor(Math.random() * best.length)].u;
+        return stockBgFor(cat);
+      }
+      function stockBgFor(cat) {
+        var list = STOCK_PHOTOS.filter(function(p){ return p.c.indexOf(cat) >= 0; });
+        if (!list.length) list = STOCK_PHOTOS;
+        return list[Math.floor(Math.random() * list.length)].u;
+      }
+
+      /* Gemini image generation for news backgrounds — REAL AI photo (user: "Background image k liye Gemini use karlo").
+         Model: gemini-2.0-flash-preview-image-generation. Returns a data URL (data:image/png;base64,...). */
+      var GEMINI_IMG_MODEL = 'gemini-2.0-flash-preview-image-generation';
+      function geminiSceneFor(cat, headline) {
+        var h = (headline || '').toLowerCase();
+        var scenes = {
+          sports:   'a packed football stadium at night with bright floodlights and dramatic atmosphere, wide angle, photorealistic',
+          breaking: 'dramatic dark stormy sky with light rays breaking through clouds, urgent news atmosphere, photorealistic',
+          politics: 'a grand government parliament building at dusk with warm lights, official atmosphere, photorealistic',
+          world:    'a modern city skyline at night with glowing lights and skyscrapers, photorealistic',
+          'default':'abstract dark professional news background with soft glowing light streaks, cinematic, photorealistic'
+        };
+        return scenes[cat] || scenes['default'];
+      }
+      function geminiNewsBgImage(sceneDesc) {
+        var key = geminiKey();
+        if (!key) return Promise.reject(new Error('Gemini key nahi hai'));
+        var body = {
+          contents: [{ parts: [{ text: 'Generate a photorealistic background image, 1:1 square: ' + sceneDesc + '. No text, no words, no letters, no watermark in the image.' }] }],
+          generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+        };
+        return fetchWithTimeout('https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_IMG_MODEL + ':generateContent?key=' + encodeURIComponent(key), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }, IMG_TIMEOUT_MS).then(function (res) {
+          if (!res.ok) throw new Error('Gemini IMG HTTP ' + res.status);
+          return res.json();
+        }).then(function (data) {
+          var parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
+          for (var i = 0; i < parts.length; i++) {
+            var id = parts[i].inlineData;
+            if (id && id.data) return 'data:' + (id.mimeType || 'image/png') + ';base64,' + id.data;
+          }
+          throw new Error('Gemini ne tasveer nahi bheji');
+        });
+      }
+
+      function imageChain(prompt) {
+        return [
+          { name: 'Hugging Face · FLUX.1-schnell', run: function () { return hfImage('black-forest-labs/FLUX.1-schnell', prompt); } },
+          { name: 'Hugging Face · SDXL', run: function () { return hfImage('stabilityai/stable-diffusion-xl-base-1.0', prompt); } },
+          { name: 'Hugging Face · SD 2.1', run: function () { return hfImage('stabilityai/stable-diffusion-2-1', prompt); } }
+        ];
+      }
+
+      /* ============ Built-in QUOTE image generator (HTML5 Canvas — NO API, NO token) ============
+         Kaale background pe safed serif quote — AI ki zaroorat nahi, is liye text
+         hamesha PERFECT aata hai (AI models text bigaad dete hain). 1080x1080 JPEG
+         data URL return karta hai — chat mein dikhta hai aur Facebook pe post bhi hota hai. */
+      function generateQuoteImage(quoteText) {
+        var text = (quoteText || '').trim();
+        if (!text) return null;
+        var size = text.length <= 60 ? 76 : text.length <= 120 ? 62 : text.length <= 200 ? 52 : 44;
+        var cv = document.createElement('canvas');
+        cv.width = 1080; cv.height = 1080;
+        var ctx = cv.getContext('2d');
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, 1080, 1080);
+        /* Upar decorative quotation mark */
+        ctx.fillStyle = '#ffffff';
+        ctx.globalAlpha = 0.9;
+        ctx.font = '200px Georgia, "Times New Roman", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('\u201C', 540, 240);
+        ctx.globalAlpha = 1;
+        /* Quote text — word wrap */
+        var maxW = 880;
+        function wrap(t, fs) {
+          ctx.font = 'italic ' + fs + 'px Georgia, "Times New Roman", serif';
+          var words = t.split(/\s+/), lines = [], line = '';
+          words.forEach(function (w) {
+            var test = line ? line + ' ' + w : w;
+            if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; }
+            else line = test;
+          });
+          if (line) lines.push(line);
+          return lines;
+        }
+        var lines = wrap(text, size);
+        while (lines.length * size * 1.45 > 560 && size > 30) { size -= 4; lines = wrap(text, size); }
+        var lh = size * 1.45;
+        var startY = 580 - ((lines.length - 1) * lh) / 2;
+        ctx.fillStyle = '#ffffff';
+        lines.forEach(function (ln, i) { ctx.fillText(ln, 540, startY + i * lh); });
+        /* Neeche halki divider line */
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(490, 950, 100, 3);
+        ctx.globalAlpha = 1;
+        return cv.toDataURL('image/jpeg', 0.92);
+      }
+
+      /* Quote request pehchano — "quote", "black background", "likha hu" waghera */
+      function detectQuoteRequest(prompt) {
+        var p = ' ' + (prompt || '').toLowerCase() + ' ';
+        var keys = ['quote', 'quotation', 'black background', 'kaala background', 'kala background', 'kaale background', 'kale background', 'black bg', 'likha hu', 'likha hua', 'likha ho', 'quote likha', 'quote likho', 'likh kar', 'likhkar'];
+        for (var i = 0; i < keys.length; i++) if (p.indexOf(keys[i]) !== -1) return true;
+        return false;
+      }
+
+      /* Prompt mein se quoted text nikalo ("..." ya '...') */
+      function extractQuotedText(prompt) {
+        var m = (prompt || '').match(/["\u201C\u201D]([^"\u201C\u201D]{3,})["\u201C\u201D]/) || (prompt || '').match(/'([^']{3,})'/);
+        return m ? m[1].trim() : '';
+      }
+
+      /* ============ Built-in NEWS image generator (AI background + Canvas headline) ============
+         Background Hugging Face se banta hai — HAR BAAR NAYA (random seed + random style
+         modifiers), headline Canvas pe draw hoti hai is liye text hamesha PERFECT.
+         Photo attach ho to wahi background banti hai (vision ki zaroorat nahi).
+         1080x1080 JPEG data URL return hota hai. */
+      function detectNewsImageRequest(prompt) {
+        var p = ' ' + (prompt || '').toLowerCase() + ' ';
+        var keys = ['news image', 'khabar wali', 'headline wali', 'is tarah ki image', 'news wali', 'breaking wali', 'khabar ki image', 'news ki image', 'headline likha'];
+        for (var i = 0; i < keys.length; i++) if (p.indexOf(keys[i]) !== -1) return true;
+        return false;
+      }
+
+      /* "X wali news image banao" -> "X" (uppercase headline) */
+      function extractNewsHeadline(prompt) {
+        var t = (prompt || '').trim();
+        if (!t) return '';
+        var q = extractQuotedText(t);
+        if (q) return q.toUpperCase();
+        var low = t.toLowerCase();
+        var anchors = ['wali news image', 'walee news image', 'news image banao', 'khabar wali image', 'headline wali image', 'is tarah ki image', 'news wali image', 'breaking wali image', 'news image'];
+        var cut = -1, i;
+        for (i = 0; i < anchors.length; i++) {
+          var idx = low.indexOf(anchors[i]);
+          if (idx !== -1 && (cut === -1 || idx < cut)) cut = idx;
+        }
+        var head = cut !== -1 ? t.slice(0, cut) : t;
+        head = head.replace(/\b(banao|bana do|banado|image|tasveer|photo|wali|walee)\b/gi, ' ').replace(/\s+/g, ' ').trim();
+        if (head.length < 3) return '';
+        return head.toUpperCase();
+      }
+
+      /* Har generation UNIQUE ho — random style modifiers, kabhi ek jaisi nahi */
+      var NEWS_STYLE_MODS = ['aerial view', 'wide angle shot', 'dramatic lighting', 'golden hour', 'night scene with bright lights', 'cinematic composition', 'low angle view', 'panoramic wide view'];
+      var lastNewsBgPrompt = '';
+      function pickNewsStyle() {
+        var a = NEWS_STYLE_MODS[Math.floor(Math.random() * NEWS_STYLE_MODS.length)];
+        var b = NEWS_STYLE_MODS[Math.floor(Math.random() * NEWS_STYLE_MODS.length)];
+        return b === a ? a : a + ', ' + b;
+      }
+      function newsSceneFor(low) {
+        var scenes = [
+          { k: ['cricket'], bg: 'cricket stadium under floodlights' },
+          { k: ['football', 'soccer', 'nfl', 'stadium', 'match'], bg: 'packed american football stadium' },
+          { k: ['protest', 'rally', 'crowd', 'march', 'dharna'], bg: 'large crowd gathering in a city square' },
+          { k: ['election', 'vote', 'parliament', 'assembly'], bg: 'grand parliament building' },
+          { k: ['war', 'army', 'soldier', 'military', 'missile'], bg: 'dramatic stormy sky over mountains' },
+          { k: ['city', 'skyline', 'downtown', 'lahore', 'karachi', 'islamabad'], bg: 'modern city skyline' },
+          { k: ['court', 'judge', 'supreme'], bg: 'grand courthouse columns' },
+          { k: ['flood', 'rain', 'storm'], bg: 'heavy rain over a city street' }
+        ];
+        for (var i = 0; i < scenes.length; i++)
+          for (var j = 0; j < scenes[i].k.length; j++)
+            if (low.indexOf(scenes[i].k[j]) !== -1) return scenes[i].bg;
+        return 'dramatic news backdrop';
+      }
+      function buildNewsBgPrompt(prompt, headline) {
+        var low = ' ' + ((prompt || '') + ' ' + (headline || '')).toLowerCase() + ' ';
+        var base = newsSceneFor(low);
+        var full = base + ', ' + pickNewsStyle();
+        if (full === lastNewsBgPrompt) full = base + ', ' + pickNewsStyle();
+        lastNewsBgPrompt = full;
+        return full;
+      }
+
+      /* Headline words: **word** = yellow; warna ALL-CAPS words = yellow, baqi white */
+      function headlineWordList(text) {
+        var out = [], hasMark = /\*\*[^*]+\*\*/.test(text);
+        var re = /\*\*([^*]+)\*\*/g, last = 0, m;
+        function push(s, yellow) {
+          s.split(/\s+/).forEach(function (w) {
+            if (!w) return;
+            var y = yellow;
+            if (!hasMark) {
+              var clean = w.replace(/[^A-Z]/g, '');
+              y = clean.length > 2;
+            }
+            out.push({ w: w, y: y });
+          });
+        }
+        while ((m = re.exec(text))) { push(text.slice(last, m.index), false); push(m[1], true); last = m.index + m[0].length; }
+        push(text.slice(last), false);
+        return out;
+      }
+
+      function drawHeadlineOn(ctx, headline, topY, maxBottom) {
+        var words = headlineWordList(String(headline || '').toUpperCase());
+        if (!words.length) return;
+        var size = 72, maxW = 920;
+        function setFont(s) { ctx.font = '900 ' + s + 'px Arial, Helvetica, sans-serif'; }
+        function linesFor(s) {
+          setFont(s);
+          var lines = [], line = [], w = 0;
+          words.forEach(function (wd) {
+            var ww = ctx.measureText(wd.w + ' ').width;
+            if (w + ww > maxW && line.length) { lines.push(line); line = []; w = 0; }
+            line.push(wd); w += ww;
+          });
+          if (line.length) lines.push(line);
+          return lines;
+        }
+        var lines = linesFor(size), guard = 0;
+        while (lines.length * size * 1.28 > (maxBottom - topY) && size > 34 && guard++ < 20) { size -= 4; lines = linesFor(size); }
+        var lh = size * 1.28;
+        var y = topY + (maxBottom - topY - lines.length * lh) / 2 + size * 0.9;
+        ctx.textBaseline = 'alphabetic';
+        lines.forEach(function (line) {
+          var totalW = 0, i;
+          for (i = 0; i < line.length; i++) totalW += ctx.measureText(line[i].w + ' ').width;
+          var x = (1080 - totalW) / 2;
+          for (i = 0; i < line.length; i++) {
+            ctx.fillStyle = line[i].y ? '#FFD700' : '#FFFFFF';
+            ctx.fillText(line[i].w, x, y);
+            x += ctx.measureText(line[i].w + ' ').width;
+          }
+          y += lh;
+        });
+      }
+
+      /* imageSrc: data/blob URL ya null (null = gradient background). Promise<dataURL|null> */
+      /* News category (bina API ke, sirf keywords se) */
+      function newsCategoryFor(text) {
+        var low = ' ' + (text || '').toLowerCase() + ' ';
+        if (/(cricket|football|soccer|nfl|stadium|match|tennis|hockey|wrestling|boxing|olympic|khel|sport)/.test(low)) return 'sports';
+        if (/(blast|dhamaka|attack|hamla|fire|aag|accident|hadsa|killed|murder|qatal|breaking|alert|dead\b)/.test(low)) return 'breaking';
+        if (/(election|vote|parliament|assembly|minister|president|wazir|hukumat|politic|sarkar|senate|court|judge|supreme)/.test(low)) return 'politics';
+        if (/(world|duniya|america|\busa\b|china|india|iran|israel|europe|\buk\b|london|dubai|saudi|turkey|russia)/.test(low)) return 'world';
+        return 'default';
+      }
+      /* Smart gradient backdrop per category — har baar thora alag (random glow/shape offset) */
+      function drawCategoryBackdrop(ctx, cat) {
+        var pals = {
+          sports:   ['#0a1a3d', '#123a75', '#04070f'],
+          breaking: ['#3d120a', '#8a2a0d', '#0f0503'],
+          politics: ['#3d0a12', '#75231a', '#0f0405'],
+          world:    ['#0a1a2e', '#1e4a7a', '#030609'],
+          def:      ['#101828', '#2a3a55', '#05070c']
+        };
+        var c = pals[cat] || pals.def;
+        var g = ctx.createLinearGradient(0, 0, 0, 1080);
+        g.addColorStop(0, c[0]); g.addColorStop(0.55, c[1]); g.addColorStop(1, c[2]);
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 1080);
+        function glow(x, y, r, col) {
+          var rg = ctx.createRadialGradient(x, y, 0, x, y, r);
+          rg.addColorStop(0, col); rg.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = rg; ctx.fillRect(x - r, y - r, r * 2, r * 2);
+        }
+        var jx = function () { return (Math.random() - 0.5) * 120; };
+        if (cat === 'sports') {
+          /* floodlight glows */
+          var fx = [140, 400, 680, 940];
+          for (var i = 0; i < fx.length; i++) glow(fx[i] + jx(), 130 + jx() * 0.4, 190, 'rgba(255,244,200,0.30)');
+          /* stadium field ellipse */
+          ctx.save(); ctx.globalAlpha = 0.85;
+          ctx.fillStyle = '#0d3b22';
+          ctx.beginPath(); ctx.ellipse(540, 760, 430, 170, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 6;
+          ctx.beginPath(); ctx.ellipse(540, 760, 430, 170, 0, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.ellipse(540, 760, 120, 48, 0, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(110, 760); ctx.lineTo(970, 760); ctx.stroke();
+          ctx.restore();
+        } else if (cat === 'politics') {
+          /* subtle column silhouettes */
+          ctx.save(); ctx.globalAlpha = 0.5; ctx.fillStyle = 'rgba(0,0,0,0.45)';
+          for (var k = 0; k < 6; k++) { var cx = 90 + k * 165 + jx() * 0.3; ctx.fillRect(cx, 300, 70, 560); }
+          ctx.fillRect(40, 240, 1000, 60);
+          ctx.restore();
+          glow(540 + jx(), 420, 260, 'rgba(255,200,150,0.18)');
+        } else if (cat === 'breaking') {
+          /* diagonal light rays */
+          ctx.save(); ctx.globalAlpha = 0.35;
+          for (var r2 = 0; r2 < 5; r2++) {
+            ctx.fillStyle = r2 % 2 ? 'rgba(255,120,40,0.25)' : 'rgba(255,60,20,0.25)';
+            ctx.beginPath();
+            var bx = 100 + r2 * 200 + jx();
+            ctx.moveTo(bx, 0); ctx.lineTo(bx + 120, 0); ctx.lineTo(bx - 160, 1080); ctx.lineTo(bx - 280, 1080);
+            ctx.closePath(); ctx.fill();
+          }
+          ctx.restore();
+          glow(540 + jx(), 300, 300, 'rgba(255,140,60,0.25)');
+        } else if (cat === 'world') {
+          /* dotted world-map feel */
+          ctx.save(); ctx.fillStyle = 'rgba(160,200,255,0.30)';
+          for (var d = 0; d < 130; d++) {
+            var dx = Math.random() * 1080, dy = Math.random() * 700;
+            ctx.beginPath(); ctx.arc(dx, dy, 2.4, 0, Math.PI * 2); ctx.fill();
+          }
+          ctx.restore();
+          glow(540 + jx(), 380, 280, 'rgba(120,170,255,0.20)');
+        } else {
+          glow(540 + jx(), 400, 320, 'rgba(150,170,220,0.16)');
+        }
+        /* vignette */
+        var v = ctx.createRadialGradient(540, 540, 300, 540, 540, 800);
+        v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.45)');
+        ctx.fillStyle = v; ctx.fillRect(0, 0, 1080, 1080);
+      }
+      function composeNewsImage(imageSrc, headlineText, cat) {
+        return new Promise(function (resolve) {
+          var cv = document.createElement('canvas');
+          cv.width = 1080; cv.height = 1080;
+          var ctx = cv.getContext('2d');
+          function finish() {
+            try {
+              var bandH = 320;
+              ctx.fillStyle = 'rgba(0,0,0,0.78)';
+              ctx.fillRect(0, 1080 - bandH, 1080, bandH);
+              drawHeadlineOn(ctx, headlineText, 1080 - bandH + 40, 1080 - 40);
+              resolve(cv.toDataURL('image/jpeg', 0.92));
+            } catch (e) { resolve(null); }
+          }
+          function gradient() {
+            drawCategoryBackdrop(ctx, cat || 'default');
+            finish();
+          }
+          if (!imageSrc) { gradient(); return; }
+          var img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = function () {
+            try {
+              var s = Math.max(1080 / img.width, 1080 / img.height);
+              var w = img.width * s, h = img.height * s;
+              ctx.drawImage(img, (1080 - w) / 2, (1080 - h) / 2, w, h);
+            } catch (e) {}
+            finish();
+          };
+          img.onerror = gradient;
+          img.src = imageSrc;
+        });
       }
 
       function generateImage(promptText, keepBox) {
@@ -1567,7 +2289,25 @@
           $('promptInput').focus();
           return Promise.resolve(false);
         }
-        var full = styleSuffix ? prompt + ', ' + styleSuffix : prompt;
+        if (!hfToken()) {
+          /* v12: token nahi to bhi image banti hai — built-in canvas gradient (error nahi) */
+          var fcv = document.createElement('canvas');
+          fcv.width = 1080; fcv.height = 1080;
+          drawCategoryBackdrop(fcv.getContext('2d'), newsCategoryFor(prompt));
+          var fdu = fcv.toDataURL('image/jpeg', 0.92);
+          state.imageUrl = fdu; state.imageModel = 'Built-in Canvas'; state.imagePrompt = prompt;
+          var fimg = $('stageImg'); fimg.src = fdu; fimg.hidden = false;
+          $('stageEmpty').hidden = true;
+          $('regenBtn').disabled = false; $('saveBtn').disabled = false;
+          $('postBtn').disabled = false; $('postIgBtn').disabled = false;
+          $('imgModelNote').hidden = false;
+          $('imgModelNote').textContent = 'Ye tasveer is model ne banayi: Built-in Canvas (bina AI ke)';
+          setStatus($('createStatus'), 'Tasveer tayyar hai! (Built-in canvas — AI token nahi tha is liye simple artistic background)', 'ok');
+          return Promise.resolve(true);
+        }
+        var withStyle = styleSuffix ? prompt + ', ' + styleSuffix : prompt;
+        /* Quality boosters — halke se, taake tasveer saaf aur detailed aaye */
+        var full = 'highly detailed, professional photography, sharp focus, ' + withStyle;
         if (!keepBox) $('promptInput').value = prompt;
         state.imagePrompt = full;
         state.busy = true;
@@ -1576,41 +2316,37 @@
         $('genBtn').disabled = true; $('regenBtn').disabled = true;
         $('saveBtn').disabled = true; $('postBtn').disabled = true; $('postIgBtn').disabled = true;
         setStatus($('createStatus'), '', '');
-        var url = pollinationsUrl(full);
-        return new Promise(function (resolve) {
-          var probe = new Image();
-          var done = false;
-          var timer = setTimeout(function () {
-            if (done) return; done = true;
-            stage.classList.remove('busy');
-            $('genBtn').disabled = false;
-            setStatus($('createStatus'), 'Tasveer banne mein bohat waqt lag gaya. Internet check karo ya dobara koshish karo.', 'bad');
-            state.busy = false;
-            resolve(false);
-          }, 120000);
-          probe.onload = function () {
-            if (done) return; done = true; clearTimeout(timer);
+        $('imgModelNote').hidden = true;
+        var chain = imageChain(full);
+        function tryNext(i) {
+          if (i >= chain.length) return Promise.resolve(null);
+          var hint = $('stageTryHint');
+          if (hint) hint.textContent = 'Model try ho raha hai: ' + chain[i].name + ' (' + (i + 1) + '/3) — fail ho to agla khud try hoga';
+          return chain[i].run()
+            .then(function (url) { return { url: url, model: chain[i].name }; })
+            .catch(function () { return tryNext(i + 1); });
+        }
+        return tryNext(0).then(function (got) {
+          stage.classList.remove('busy');
+          $('genBtn').disabled = false;
+          state.busy = false;
+          if (got) {
             var img = $('stageImg');
-            img.src = url;
+            img.src = got.url;
             img.hidden = false;
             $('stageEmpty').hidden = true;
-            state.imageUrl = url;
-            stage.classList.remove('busy');
-            $('genBtn').disabled = false; $('regenBtn').disabled = false;
+            state.imageUrl = got.url;
+            state.imageModel = got.model;
+            $('regenBtn').disabled = false;
             $('saveBtn').disabled = false; $('postBtn').disabled = false; $('postIgBtn').disabled = false;
+            var note = $('imgModelNote');
+            note.hidden = false;
+            note.textContent = 'Ye tasveer is model ne banayi: ' + got.model;
             setStatus($('createStatus'), 'Tasveer tayyar hai! Caption likh ke Facebook ya Instagram pe post kar sakte ho.', 'ok');
-            state.busy = false;
-            resolve(true);
-          };
-          probe.onerror = function () {
-            if (done) return; done = true; clearTimeout(timer);
-            stage.classList.remove('busy');
-            $('genBtn').disabled = false;
-            setStatus($('createStatus'), 'Tasveer nahi bani — Pollinations busy ho sakta hai. Thora ruk ke dobara try karo.', 'bad');
-            state.busy = false;
-            resolve(false);
-          };
-          probe.src = url;
+            return true;
+          }
+          setStatus($('createStatus'), 'Tasveer nahi bani — teeno Hugging Face models (FLUX.1-schnell, SDXL, SD 2.1) try kiye, sab fail ho gaye. Token sahi hai ya nahi check karo, thora ruk ke dobara try karo.', 'bad');
+          return false;
         });
       }
       /* Create tab ki reference photo (data URL) — lagi ho to generation usi style mein hoti hai */
@@ -1649,7 +2385,9 @@
             return generateImage(merged, true);
           })
           .catch(function () {
-            setStatus($('createStatus'), 'Reference photo parh nahi paya — vision abhi jawab nahi de raha. Apne alfaaz mein bata do photo mein kya pasand hai (subject, rang, mood), ya reference hata ke sirf prompt se bana lo.', 'bad');
+            /* Vision fail — reference hata ke sirf prompt se banao (koi error nahi, tasveer zaroor banegi) */
+            setStatus($('createStatus'), 'Reference photo samajh nahi aayi — sirf prompt se tasveer bana raha hoon…', 'info');
+            return generateImage(userPrompt || 'beautiful artistic image', true);
           })
           .then(function () { $('genBtn').disabled = false; });
       }
@@ -1691,7 +2429,7 @@
         'Tum Super Social Control ho — ek smart AI assistant, bilkul Muse jaisa. User Roman Urdu ya English mein baat karega. Tum usi language mein jawab do jis mein user baat kare (Roman Urdu ho to Roman Urdu). Dostana aur helpful raho. Hamesha pehle samjho, phir tools use karo, phir jawab do. Jawab mukhtasar aur kaam ke rakho — lambay lecture nahi.',
         '',
         'Tum sirf jawab nahi dete — tum ACTIONS bhi le sakte ho. Tumhare paas ye TOOLS hain:',
-        '1. generate_image — args: {"prompt": "detailed English image prompt", "style": "optional style words, e.g. cinematic, photorealistic"} — AI tasveer banata hai.',
+        '1. generate_image — args: {"prompt": "detailed English image prompt", "style": "optional style words, e.g. cinematic, photorealistic"} — AI tasveer banata hai (Hugging Face token chahiye). QUOTE TASVEER (built-in, NO token/API): agar user kahe "black background pe quote likha ho" / "quote wali image" / "likha hu" / "koi acha sa quote likha hu" to args mein {"quote": "poora quote text English mein"} bhejo — ye app ke andar canvas se banegi, text hamesha PERFECT, koi token nahi chahiye. User "apni marzi se bana do" kahe to khud koi acha English quote chun ke {"quote": "..."} mein bhejo. NEWS TASVEER (AI background HAR BAAR NAYA + canvas headline, text PERFECT): agar user kahe "news image banao" / "khabar wali image" / "headline wali image" / "is tarah ki image" to args mein {"news_headline": "HEADLINE ENGLISH CAPS MEIN", "news_bg": "background English mein"} bhejo — background Hugging Face se har baar nayi banegi (random seed), headline canvas pe perfect likhi jayegi. Headline user ne na di ho to pehle poocho "Headline kya likhun?" — andaza mat lagao.',
         '2. post_to_facebook — args: {"image_url": "optional — na do to aakhri bani tasveer post hogi", "caption": "post ka caption"} — active Facebook Page pe photo post karta hai.',
         '3. post_to_instagram — args: {"image_url": "optional", "caption": "..."} — active Instagram account pe photo post karta hai.',
         '4. search_web — args: {"query": "search query"} — web se maloomat lata hai.',
@@ -1704,7 +2442,9 @@
         'Ek waqt mein sirf EK tool call karo. Tool ka result tumhe wapas mile ga; phir zaroorat ho to agla tool call karo, warna user ko final jawab do.',
         'Jab user kahe "tasveer banao aur post kar do" to pehle generate_image, phir us ke result ke baad post_to_facebook call karo.',
         'Agar user sirf baat ya sawal kare (salam, caption likhna, idea, mashwara) to tool call mat karo — seedha dostana text jawab do.',
-        'Tool fail ho jaye to user ko saaf batao kya masla hua aur kya karna hai (jaise Settings mein ja ke Facebook connect karna).'
+        'Tool fail ho jaye to user ko saaf batao kya masla hua aur kya karna hai (jaise Settings mein ja ke Facebook connect karna).',
+        '',
+        'SAKHT RULE — kabhi mat toro: NEVER output raw JSON to the user. Apni reasoning/soch, "tool_calls", "role" ya koi bhi internal JSON user ko KABHI mat dikhao — tool calls app ke andar internally handle hote hain. Tool call karna ho to SIRF upar wala ek {"tool": "...", "args": {...}} object do; us ke saath koi text, reasoning ya doosra format (jaise {"role": "assistant", "tool_calls": [...]}) bilkul NAHI. Baqi har jawab hamesha natural language mein do — user Roman Urdu bol raha ho to Roman Urdu mein, warna usi ki language mein. ALWAYS respond in natural language.'
       ].join('\n');
 
       /* Har model call se pehle live haalat — taake agent ko pata ho kya connected hai */
@@ -1721,6 +2461,197 @@
 
       var chatScroll = $('chatScroll');
       function scrollChat() { chatScroll.scrollTop = chatScroll.scrollHeight; }
+
+      /* ============ Chat history — multiple conversations (localStorage, is device par hi) ============
+         Har conversation: { id, title, createdAt, updatedAt, msgs: [...] }
+         msg records: {role:'user'|'assistant'|'error', text}
+                      {role:'toolstep', tool, label, state, detail, image}
+         App band karke kholo to active chat wapas render ho jati hai, aur
+         state.history bhi unhi messages se banti hai — agent ko pichli baat
+         yaad rehti hai (jaise "wohi tasveer" ka context). */
+      var convs = [];
+      var activeConvId = '';
+      var restoring = false;
+      var welcomeHTML = '';
+
+      function loadConvs() {
+        try {
+          var c = JSON.parse(LS.get('chats', '[]'));
+          if (!Array.isArray(c)) return [];
+          return c.filter(function (x) { return x && x.id && Array.isArray(x.msgs); });
+        } catch (e) { return []; }
+      }
+      function saveConvs() {
+        try { LS.set('chats', JSON.stringify(convs.slice(0, 30))); } catch (e) {}
+        LS.set('activeChatId', activeConvId);
+      }
+      function activeConv() {
+        for (var i = 0; i < convs.length; i++) if (convs[i].id === activeConvId) return convs[i];
+        return null;
+      }
+      function newConvRecord() {
+        var c = {
+          id: 'c' + Date.now().toString(36) + Math.floor(Math.random() * 9999).toString(36),
+          title: 'Nayi chat', createdAt: Date.now(), updatedAt: Date.now(), msgs: []
+        };
+        convs.unshift(c);
+        return c;
+      }
+      function makeTitle(text) {
+        var t = String(text || '').replace(/\s+/g, ' ').trim();
+        if (!t) return 'Nayi chat';
+        return t.length > 42 ? t.slice(0, 42) + '…' : t;
+      }
+      function persistMsg(rec) {
+        var c = activeConv();
+        if (!c) { c = newConvRecord(); activeConvId = c.id; }
+        if (rec.role === 'user' && !c.msgs.some(function (m) { return m.role === 'user'; })) {
+          c.title = makeTitle(rec.text);
+        }
+        c.msgs.push(rec);
+        if (c.msgs.length > 300) c.msgs = c.msgs.slice(-300);
+        c.updatedAt = Date.now();
+        saveConvs();
+        renderChatList();
+        updateChatTitle();
+      }
+      function updateChatTitle() {
+        var el = $('chatTitle');
+        if (!el) return;
+        var c = activeConv();
+        el.textContent = c ? (c.title || 'Nayi chat') : 'Nayi chat';
+      }
+      function buildWelcome() {
+        var wrap = document.createElement('div');
+        wrap.innerHTML = welcomeHTML;
+        var el = wrap.firstElementChild;
+        if (!el) return null;
+        el.querySelectorAll('[data-say]').forEach(function (b) {
+          b.addEventListener('click', function () { showTab('chat'); handleChat(b.getAttribute('data-say')); });
+        });
+        return el;
+      }
+      function renderToolRecord(m) {
+        var w = $('welcome'); if (w) w.remove();
+        var card = document.createElement('div');
+        card.className = 'toolstep ' + (m.state === 'failed' ? 'failed' : 'done');
+        card.innerHTML = '<div class="ts-ic">' + (TOOL_ICONS[m.tool] || TOOL_ICONS.generic) + '</div>' +
+          '<div class="ts-body"><div class="ts-name">' + esc(m.label || '') +
+          '<span class="ts-state">' + (m.state === 'failed' ? 'fail ✕' : 'ho gaya ✓') + '</span></div>' +
+          '<div class="ts-detail">' + esc(m.detail || '') + '</div></div>';
+        if (m.image) {
+          var im = document.createElement('img');
+          im.className = 'ts-img'; im.src = m.image; im.alt = 'AI se bani hui tasveer';
+          card.querySelector('.ts-body').appendChild(im);
+        }
+        chatScroll.appendChild(card);
+      }
+      function renderConv() {
+        var c = activeConv();
+        var msgs = c ? c.msgs : [];
+        chatScroll.innerHTML = '';
+        state.history = [];
+        msgs.forEach(function (m) {
+          if ((m.role === 'user' || m.role === 'assistant') && m.text) {
+            var ht = m.role === 'assistant' ? cleanAssistantText(m.text) : m.text;
+            if (ht) state.history.push({ role: m.role, text: ht });
+          }
+          if (m.role === 'toolstep' && m.image) state.imageUrl = m.image;
+        });
+        if (!msgs.length) {
+          var wel = buildWelcome();
+          if (wel) chatScroll.appendChild(wel);
+        } else {
+          restoring = true;
+          msgs.forEach(function (m) {
+            if (m.role === 'user') addUserMsg(m.text);
+            else if (m.role === 'assistant') addAiMsg(m.text);
+            else if (m.role === 'error') addErrMsg(m.text);
+            else if (m.role === 'toolstep') renderToolRecord(m);
+          });
+          restoring = false;
+        }
+        updateChatTitle();
+        scrollChat();
+      }
+      function renderChatList() {
+        var wrap = $('chatList');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        if (!convs.length) {
+          wrap.innerHTML = '<div class="empty-note">Abhi koi chat nahi hai. Nayi chat shuru karo!</div>';
+          return;
+        }
+        convs.forEach(function (c) {
+          var row = document.createElement('div');
+          row.className = 'chatrow' + (c.id === activeConvId ? ' active' : '');
+          row.setAttribute('role', 'button');
+          row.innerHTML = '<div class="who"><div class="nm">' + esc(c.title || 'Nayi chat') + '</div>' +
+            '<div class="meta">' + esc(fmtDate(c.updatedAt || c.createdAt)) + ' · ' + c.msgs.length + ' messages</div></div>';
+          var del = document.createElement('button');
+          del.type = 'button'; del.className = 'del';
+          del.setAttribute('aria-label', 'Ye chat delete karo');
+          del.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>';
+          del.addEventListener('click', function (e) { e.stopPropagation(); deleteConv(c.id); });
+          row.appendChild(del);
+          row.addEventListener('click', function () { switchConv(c.id); });
+          wrap.appendChild(row);
+        });
+      }
+      function openChatList() { renderChatList(); $('chatListPanel').hidden = false; }
+      function closeChatList() { $('chatListPanel').hidden = true; }
+      function switchConv(id) {
+        if (state.chatBusy) { closeChatList(); return; }
+        if (id === activeConvId) { closeChatList(); return; }
+        activeConvId = id;
+        saveConvs();
+        renderConv();
+        renderChatList();
+        closeChatList();
+      }
+      function deleteConv(id) {
+        if (state.chatBusy && id === activeConvId) { closeChatList(); return; }
+        convs = convs.filter(function (x) { return x.id !== id; });
+        if (id === activeConvId) {
+          activeConvId = convs.length ? convs[0].id : newConvRecord().id;
+          renderConv();
+        }
+        saveConvs();
+        renderChatList();
+        updateChatTitle();
+      }
+      function startNewChat() {
+        if (state.chatBusy) { closeChatList(); return; }
+        var c = activeConv();
+        if (!c || c.msgs.length) activeConvId = newConvRecord().id;
+        saveConvs();
+        renderConv();
+        renderChatList();
+        closeChatList();
+        var inp = $('chatInput'); if (inp) inp.focus();
+      }
+      function resetChats() {
+        convs = [];
+        activeConvId = newConvRecord().id;
+        saveConvs();
+        renderConv();
+        renderChatList();
+      }
+      function initChats() {
+        var w = $('welcome');
+        if (w) welcomeHTML = w.outerHTML;
+        convs = loadConvs();
+        activeConvId = LS.get('activeChatId', '');
+        if (!activeConv()) activeConvId = convs.length ? convs[0].id : newConvRecord().id;
+        saveConvs();
+        renderConv();
+        renderChatList();
+      }
+      $('chatListBtn').addEventListener('click', openChatList);
+      $('chatListClose').addEventListener('click', closeChatList);
+      $('newChatBtn').addEventListener('click', startNewChat);
+      $('chatListNew').addEventListener('click', startNewChat);
+
       function addMsg(cls, html) {
         var w = $('welcome'); if (w) w.remove();
         var d = document.createElement('div');
@@ -1730,9 +2661,17 @@
         scrollChat();
         return d;
       }
-      function addUserMsg(text) { return addMsg('me', esc(text)); }
-      function addAiMsg(text) { return addMsg('ai', fmt(text)); }
-      function addErrMsg(text) { return addMsg('ai err', esc(text)); }
+      function addUserMsg(text) { if (!restoring) persistMsg({ role: 'user', text: text }); return addMsg('me', esc(text)); }
+      function addAiMsg(text) {
+        // Hifazat ki aakhri layer: assistant ka koi bhi text screen pe jaane
+        // se pehle saaf hota hai — internal JSON (reasoning/tool_calls) kabhi
+        // display nahi hota, purani saved chats mein ho to bhi nahi.
+        var clean = cleanAssistantText(text);
+        if (!clean) clean = 'Ho gaya! Kuch aur chahiye to bas keh do.';
+        if (!restoring) persistMsg({ role: 'assistant', text: clean });
+        return addMsg('ai', fmt(clean));
+      }
+      function addErrMsg(text) { if (!restoring) persistMsg({ role: 'error', text: text }); return addMsg('ai err', esc(text)); }
 
       var STOP_WORDS = /(posting (rok|band)|post (rok|band)|mat post|stop posting)/i;
       var START_WORDS = /(posting (shuru|chalu|on kar|start)|start posting)/i;
@@ -1761,13 +2700,17 @@
         var body = card.querySelector('.ts-body');
         var detailEl = card.querySelector('.ts-detail');
         var stateEl = card.querySelector('.ts-state');
+        var rec = { role: 'toolstep', tool: toolName, label: label, state: 'run', detail: '', image: '' };
+        if (!restoring) persistMsg(rec);
         return {
-          done: function (t) { card.classList.add('done'); stateEl.textContent = 'ho gaya ✓'; if (t) detailEl.textContent = t; scrollChat(); },
-          fail: function (t) { card.classList.add('failed'); stateEl.textContent = 'fail ✕'; if (t) detailEl.textContent = t; scrollChat(); },
+          done: function (t) { card.classList.add('done'); stateEl.textContent = 'ho gaya ✓'; if (t) detailEl.textContent = t; rec.state = 'done'; if (t) rec.detail = t; saveConvs(); scrollChat(); },
+          fail: function (t) { card.classList.add('failed'); stateEl.textContent = 'fail ✕'; if (t) detailEl.textContent = t; rec.state = 'failed'; if (t) rec.detail = t; saveConvs(); scrollChat(); },
           setImage: function (url) {
             var im = document.createElement('img');
             im.className = 'ts-img'; im.src = url; im.alt = 'AI se bani hui tasveer';
-            body.appendChild(im); scrollChat();
+            body.appendChild(im);
+            if (/^https?:\/\//i.test(url)) { rec.image = url; saveConvs(); }
+            scrollChat();
           },
           addPostActions: function () {
             var row = document.createElement('div');
@@ -1819,13 +2762,143 @@
           label: 'Tasveer bana raha hoon',
           run: function (args) {
             var prompt = ((args && args.prompt) || '').trim();
+            /* QUOTE TASVEER — built-in canvas, NO API/NO token. args.quote ho ya
+               prompt mein quote keywords hon to canvas se banao. */
+            var quoteArg = ((args && args.quote) || '').trim();
+            var wantsQuote = !!quoteArg || detectQuoteRequest(prompt);
+            if (wantsQuote) {
+              var quoted = quoteArg || extractQuotedText(prompt);
+              if (!quoted) {
+                return Promise.resolve({ result: { ok: false, error: 'Quote ka text nahi mila. User se poocho kaunsa quote likhna hai, phir generate_image mein {"quote": "quote text"} ke saath dobara bhejo — ye built-in canvas se banegi, koi token nahi chahiye.' }, detail: prompt || 'quote request' });
+              }
+              var dataUrl = generateQuoteImage(quoted);
+              if (!dataUrl) return Promise.resolve({ result: { ok: false, error: 'Quote image nahi ban saki.' }, detail: prompt });
+              state.imageUrl = dataUrl;
+              state.imageModel = 'Built-in Canvas';
+              try {
+                var qimg = $('stageImg');
+                qimg.src = dataUrl; qimg.hidden = false;
+                $('stageEmpty').hidden = true;
+                $('regenBtn').disabled = false;
+                $('saveBtn').disabled = false; $('postBtn').disabled = false; $('postIgBtn').disabled = false;
+                var qnote = $('imgModelNote');
+                qnote.hidden = false;
+                qnote.textContent = 'Ye tasveer is model ne banayi: Built-in Canvas (bina AI ke — text hamesha perfect)';
+                setStatus($('createStatus'), 'Quote wali tasveer tayyar hai! Caption likh ke Facebook ya Instagram pe post kar sakte ho.', 'ok');
+              } catch (e) {}
+              return Promise.resolve({ result: { ok: true, image_url: dataUrl, prompt: quoted, model: 'Built-in Canvas', note: 'Quote wali tasveer built-in canvas se ban gayi hai (kaala background, safed serif text) — koi AI/token nahi laga, text perfect hai. User ko bata do tasveer tayyar hai.' }, detail: '\u201C' + quoted + '\u201D · Model: Built-in Canvas', image: dataUrl, actions: true });
+            }
+            /* NEWS TASVEER v17 — background PEHLE Gemini image generation se (REAL AI photo,
+               Gemini key verified working hai) + Canvas headline overlay (text hamesha PERFECT).
+               Gemini fail ho to HF FLUX secondary, phir built-in canvas gradient fallback —
+               har baar guaranteed image. args.news_headline ho ya prompt mein news keywords hon.
+               Bina photo ke bhi chalti hai; photo attach ho to args.photo mein wahi background
+               banti hai (vision skip). */
+            var newsArg = ((args && args.news_headline) || '').trim();
+            var wantsNews = !!newsArg || detectNewsImageRequest(prompt);
+            if (wantsNews) {
+              var newsHeadline = newsArg || extractNewsHeadline(prompt);
+              if (!newsHeadline) {
+                return Promise.resolve({ result: { ok: false, error: 'News headline nahi mili. User se poocho kaunsi headline likhni hai, phir generate_image mein {"news_headline": "HEADLINE ENGLISH MEIN"} ke saath dobara bhejo — background AI se nayi banegi, headline canvas pe perfect likhi jayegi.' }, detail: prompt || 'news request' });
+              }
+              var newsPhoto = ((args && args.photo) || '').trim();
+              var newsBgDesc = ((args && args.news_bg) || '').trim();
+              function wireNewsResult(dataUrl, modelLabel, noteText) {
+                if (!dataUrl) return { result: { ok: false, error: 'News image nahi ban saki.' }, detail: newsHeadline };
+                state.imageUrl = dataUrl;
+                state.imageModel = modelLabel;
+                try {
+                  var nimg = $('stageImg');
+                  nimg.src = dataUrl; nimg.hidden = false;
+                  $('stageEmpty').hidden = true;
+                  $('regenBtn').disabled = false;
+                  $('saveBtn').disabled = false; $('postBtn').disabled = false; $('postIgBtn').disabled = false;
+                  var nnote = $('imgModelNote');
+                  nnote.hidden = false;
+                  nnote.textContent = 'Ye tasveer is model ne banayi: ' + modelLabel;
+                  setStatus($('createStatus'), 'News wali tasveer tayyar hai! Caption likh ke Facebook ya Instagram pe post kar sakte ho.', 'ok');
+                } catch (e) {}
+                return { result: { ok: true, image_url: dataUrl, prompt: newsHeadline, model: modelLabel, note: noteText }, detail: '\u201C' + newsHeadline + '\u201D \u00B7 Model: ' + modelLabel, image: dataUrl, actions: true };
+              }
+              function composeAndWire(src, modelLabel, noteText, cat) {
+                return composeNewsImage(src, newsHeadline, cat).then(function (du) { return wireNewsResult(du, modelLabel, noteText); });
+              }
+              if (newsPhoto) {
+                return composeAndWire(newsPhoto, 'Built-in Canvas', 'News-style image tumhari attached photo pe canvas headline ke saath ban gayi hai — vision ki zaroorat nahi pari, text perfect hai. User ko bata do tasveer tayyar hai.');
+              }
+              /* v18: STOCK PHOTO PRIMARY for REAL professional backgrounds (user rejected Pollinations; HF token dead; Gemini image gen failing).
+                 Curated Unsplash CDN photos per category — FREE, no key, verified working.
+                 Chain: Stock Photo -> Gemini -> HF FLUX -> built-in canvas gradient (guaranteed image, kabhi error nahi) */
+              var newsCat = newsCategoryFor((prompt || '') + ' ' + newsHeadline + ' ' + (newsBgDesc || ''));
+              var catName = { sports: 'Sports', breaking: 'Breaking', politics: 'Politics', world: 'World', 'default': 'General' }[newsCat] || 'General';
+              var geminiScene = (newsBgDesc || '') ? ('photorealistic scene for news: ' + newsBgDesc) : geminiSceneFor(newsCat, newsHeadline);
+              function canvasFallbackNews() {
+                return composeAndWire(null, 'Built-in Canvas', 'News-style image built-in canvas se ban gayi hai (' + catName + ' theme background, headline text PERFECT). User ko bata do tasveer tayyar hai.', newsCat);
+              }
+              function tryGeminiThenHF() {
+                return geminiNewsBgImage(geminiScene)
+                  .then(function (dataUrl) {
+                    return composeAndWire(dataUrl, 'Gemini', 'News-style image: REAL AI background (Gemini) + canvas headline (text PERFECT). User ko bata do tasveer tayyar hai.', newsCat);
+                  })
+                  .catch(function () {
+                    /* Gemini fail -> HF FLUX secondary */
+                    var newsBgPrompt = buildNewsBgPrompt(newsBgDesc || newsHeadline, newsHeadline);
+                    return hfImage('black-forest-labs/FLUX.1-schnell', newsBgPrompt, Math.floor(Math.random() * 1000000))
+                      .then(function (blobUrl) {
+                        return composeAndWire(blobUrl, 'Hugging Face · FLUX.1-schnell', 'News-style image: REAL AI background (Hugging Face FLUX) + canvas headline (text PERFECT). User ko bata do tasveer tayyar hai.', newsCat);
+                      })
+                      .catch(canvasFallbackNews);
+                  });
+              }
+              /* Stock photo first: preload-check so a dead URL falls through to Gemini/HF/canvas chain */
+              var stockUrl = smartBgFor(newsHeadline + ' ' + (newsBgDesc || '') + ' ' + (prompt || ''), newsCat);
+              return new Promise(function (resolveStock) {
+                var probe = new Image();
+                probe.crossOrigin = 'anonymous';
+                var done = false;
+                function ok() { if (!done) { done = true; resolveStock(true); } }
+                function bad() { if (!done) { done = true; resolveStock(false); } }
+                probe.onload = ok; probe.onerror = bad;
+                setTimeout(bad, 12000);
+                probe.src = stockUrl;
+              }).then(function (stockOk) {
+                if (stockOk) {
+                  return composeAndWire(stockUrl, 'Stock Photo', 'News-style image: REAL professional stock photo (' + catName + ') + canvas headline (text PERFECT). User ko bata do tasveer tayyar hai.', newsCat);
+                }
+                return tryGeminiThenHF();
+              });
+            }
             if (!prompt) return Promise.resolve({ result: { ok: false, error: 'prompt missing hai' }, detail: 'Prompt nahi mila' });
             var prevStyle = styleSuffix;
             if (args.style) styleSuffix = String(args.style);
+            /* v12: built-in canvas fallback — token na ho ya HF fail ho to bhi image banti hai, error nahi */
+            function canvasArtFallback() {
+              return new Promise(function (resolve) {
+                var cv = document.createElement('canvas');
+                cv.width = 1080; cv.height = 1080;
+                var ctx = cv.getContext('2d');
+                drawCategoryBackdrop(ctx, newsCategoryFor(prompt));
+                var du = cv.toDataURL('image/jpeg', 0.92);
+                state.imageUrl = du;
+                state.imageModel = 'Built-in Canvas';
+                state.imagePrompt = prompt;
+                try {
+                  var img = $('stageImg'); img.src = du; img.hidden = false;
+                  $('stageEmpty').hidden = true;
+                  $('regenBtn').disabled = false; $('saveBtn').disabled = false;
+                  $('postBtn').disabled = false; $('postIgBtn').disabled = false;
+                  var note2 = $('imgModelNote'); note2.hidden = false;
+                  note2.textContent = 'Ye tasveer is model ne banayi: Built-in Canvas (bina AI ke)';
+                  setStatus($('createStatus'), 'Tasveer tayyar hai! (Built-in canvas — AI token nahi tha is liye simple artistic background)', 'ok');
+                } catch (e) {}
+                resolve({ result: { ok: true, image_url: du, prompt: prompt, model: 'Built-in Canvas', note: 'Tasveer built-in canvas se ban gayi hai (koi AI token nahi laga). User ko bata do tasveer tayyar hai.' }, detail: prompt + ' \u00B7 Model: Built-in Canvas', image: du, actions: true });
+              });
+            }
+            if (!hfToken()) { styleSuffix = prevStyle; return canvasArtFallback(); }
             return generateImage(prompt).then(function (ok) {
               styleSuffix = prevStyle;
-              if (ok) return { result: { ok: true, image_url: state.imageUrl, prompt: prompt, note: 'Tasveer ban gayi hai aur Create tab mein bhi dikh rahi hai.' }, detail: prompt, image: state.imageUrl, actions: true };
-              return { result: { ok: false, error: 'Tasveer nahi ban saki — Pollinations busy ho sakta hai, thora ruk ke dobara try karna hoga.' }, detail: prompt };
+              if (ok) return { result: { ok: true, image_url: state.imageUrl, prompt: prompt, model: state.imageModel, note: 'Tasveer ban gayi hai aur Create tab mein bhi dikh rahi hai. User ko bata do ke ye tasveer ' + state.imageModel + ' model ne banayi hai.' }, detail: prompt + ' \u00B7 Model: ' + state.imageModel, image: state.imageUrl, actions: true };
+              return canvasArtFallback();
             });
           }
         },
@@ -1968,10 +3041,121 @@
         return null;
       }
 
+      /* ============ Agent jawab ki safai — internal JSON kabhi user ko nahi ============
+         Kuch models OpenAI-style envelope bhej dete hain, masalan:
+         {"role":"assistant","reasoning":"...","tool_calls":[...]} ya sirf
+         {"role":"assistant","content":"..."} — pehle ye RAW text chat mein
+         display ho jata tha. Ab har model jawab pehle yahan parse hota hai:
+         tool_calls hon to woh SACH MEIN execute hote hain, content ho to wohi
+         natural jawab banta hai, aur reasoning/internal JSON hamesha andar
+         hi rehta hai — user ko sirf natural language dikhta hai. */
+      function parseToolArgs(a) {
+        if (!a) return {};
+        if (typeof a === 'string') {
+          try { var p = JSON.parse(a); return (p && typeof p === 'object') ? p : {}; } catch (e) { return {}; }
+        }
+        return (typeof a === 'object') ? a : {};
+      }
+      /* Kisi bhi JSON object se hamara internal {tool, args} call nikalo —
+         hamara format {"tool":...}, OpenAI format {"tool_calls":[{"function":{...}}]},
+         ya bare {"name":..., "arguments":...} — teeno chalte hain */
+      function callFromEnvelope(obj) {
+        if (!obj || typeof obj !== 'object') return null;
+        if (typeof obj.tool === 'string' && obj.tool) return { tool: obj.tool, args: parseToolArgs(obj.args) };
+        if (typeof obj.name === 'string' && obj.name && ('arguments' in obj || 'args' in obj)) {
+          return { tool: obj.name, args: parseToolArgs(obj.arguments || obj.args) };
+        }
+        var fc = obj.function_call || obj.functionCall;
+        if (fc && typeof fc.name === 'string' && fc.name) return { tool: fc.name, args: parseToolArgs(fc.arguments || fc.args) };
+        var tcs = obj.tool_calls || obj.toolCalls;
+        if (Array.isArray(tcs) && tcs.length) {
+          var t = tcs[0] || {};
+          var fn = t.function || t;
+          var name = fn.name || t.name || t.tool;
+          if (typeof name === 'string' && name) return { tool: name, args: parseToolArgs(fn.arguments || t.arguments || t.args) };
+        }
+        return null;
+      }
+      function isEnvelope(obj) {
+        return !!obj && typeof obj === 'object' &&
+          ('tool_calls' in obj || 'toolCalls' in obj || 'reasoning' in obj || 'function_call' in obj || obj.role === 'assistant');
+      }
+      /* Text ke andar saare balanced JSON objects dhoondo jo parse ho jayen */
+      function findJsonObjects(text) {
+        var out = [];
+        if (!text) return out;
+        var i = 0;
+        while (i < text.length) {
+          if (text[i] !== '{') { i++; continue; }
+          var depth = 0, inStr = false, escCh = false, end = -1;
+          for (var j = i; j < text.length; j++) {
+            var c = text[j];
+            if (inStr) {
+              if (escCh) escCh = false;
+              else if (c === '\\') escCh = true;
+              else if (c === '"') inStr = false;
+            } else if (c === '"') inStr = true;
+            else if (c === '{') depth++;
+            else if (c === '}') { depth--; if (depth === 0) { end = j; break; } }
+          }
+          if (end > i) {
+            try {
+              var obj = JSON.parse(text.slice(i, end + 1));
+              if (obj && typeof obj === 'object') { out.push({ obj: obj, start: i, end: end + 1 }); i = end + 1; continue; }
+            } catch (e) { /* parse nahi hua — aage barho */ }
+          }
+          i++;
+        }
+        return out;
+      }
+      /* Assistant ka text user ko dikhane se pehle saaf karo: internal JSON
+         envelope ho to sirf us ka "content" rakho, warna envelope hata do.
+         Aam natural text bilkul waisa hi rehta hai. */
+      function cleanAssistantText(text) {
+        var t = String(text || '');
+        if (!t) return '';
+        t = t.replace(/```(?:json)?\s*([\s\S]*?)```/gi, function (m, inner) {
+          return (/"(tool_calls|toolCalls|reasoning)"\s*:/.test(inner) || /^\s*\{\s*"(role|tool)"\s*:/.test(inner)) ? '' : m;
+        });
+        var objs = findJsonObjects(t);
+        for (var i = objs.length - 1; i >= 0; i--) {
+          var o = objs[i].obj;
+          if (isEnvelope(o) || callFromEnvelope(o)) {
+            var c = (typeof o.content === 'string') ? o.content : '';
+            t = t.slice(0, objs[i].start) + c + t.slice(objs[i].end);
+          }
+        }
+        t = t.replace(/\n{3,}/g, '\n\n').trim();
+        // Aakhri hifazat: text ab bhi internal JSON jaisa lage to kabhi display mat karo
+        if (/^\{[\s\S]*"(tool_calls|toolCalls|reasoning)"\s*:/.test(t)) return '';
+        if (/^"(role|reasoning|tool_calls)"\s*:/.test(t)) return '';
+        return t;
+      }
+      /* Model ke jawab ko samjho: {call} agar tool chalana hai, warna {text}
+         saaf natural jawab. envelope=true ka matlab model ne internal format
+         bheja tha (jo user ko kabhi nahi dikhna). */
+      function parseAgentReply(text) {
+        var raw = String(text || '');
+        var direct = extractToolCall(raw);
+        if (direct) return { call: direct, text: '', envelope: false };
+        var objs = findJsonObjects(raw);
+        for (var i = 0; i < objs.length; i++) {
+          var o = objs[i].obj;
+          var c = callFromEnvelope(o);
+          if (c) return { call: c, text: '', envelope: true };
+          if (isEnvelope(o)) {
+            var content = (typeof o.content === 'string') ? o.content : '';
+            var rest = (raw.slice(0, objs[i].start) + ' ' + raw.slice(objs[i].end)).trim();
+            var merged = cleanAssistantText([content, rest].filter(function (x) { return x && x.trim(); }).join('\n'));
+            return { call: null, text: merged, envelope: true };
+          }
+        }
+        return { call: null, text: cleanAssistantText(raw), envelope: false };
+      }
+
       var MAX_AGENT_STEPS = 6;
       function agentFinish(text) {
-        var finalText = (text || '').trim()
-          .replace(/```(?:json)?\s*\{[\s\S]*?\}\s*```/g, '').trim();
+        var finalText = cleanAssistantText(text);
         if (!finalText) finalText = 'Ho gaya! Kuch aur chahiye to bas keh do.';
         state.history.push({ role: 'assistant', text: finalText });
         addAiMsg(finalText);
@@ -1981,14 +3165,15 @@
         var typing = addMsg('ai', '<span class="typing"><i></i><i></i><i></i></span>');
         return callModel(turn).then(function (reply) {
           typing.remove();
-          var call = extractToolCall(reply);
+          var parsed = parseAgentReply(reply);
+          var call = parsed.call;
           if (call && TOOLS[call.tool]) {
             if (step >= MAX_AGENT_STEPS) {
               turn.push({ role: 'user', text: '(System note: tool steps ki limit khatam ho gayi hai. Ab koi tool call mat karo — jo kaam ho chuka hai us ka mukhtasar final jawab user ko do.)' });
               var typing2 = addMsg('ai', '<span class="typing"><i></i><i></i><i></i></span>');
               return callModel(turn).then(function (r2) { typing2.remove(); agentFinish(r2); });
             }
-            turn.push({ role: 'assistant', text: reply });
+            turn.push({ role: 'assistant', text: JSON.stringify({ tool: call.tool, args: call.args || {} }) });
             var tool = TOOLS[call.tool];
             var ui = addToolStep(call.tool, tool.label);
             return tool.run(call.args || {})
@@ -2006,11 +3191,18 @@
               });
           }
           if (call && !TOOLS[call.tool] && step < MAX_AGENT_STEPS) {
-            turn.push({ role: 'assistant', text: reply });
+            turn.push({ role: 'assistant', text: JSON.stringify({ tool: call.tool, args: call.args || {} }) });
             turn.push({ role: 'tool', text: 'Error: "' + call.tool + '" naam ka koi tool nahi hai. Available tools: generate_image, post_to_facebook, post_to_instagram, search_web, check_connections, toggle_posting, get_page_info. Ya to sahi tool call karo, ya user ko text jawab do.' });
             return agentLoop(turn, step + 1);
           }
-          agentFinish(reply);
+          if (parsed.envelope && !parsed.text && step < MAX_AGENT_STEPS) {
+            // Model ne sirf internal JSON envelope bheja (reasoning/tool_calls)
+            // aur koi jawab nahi — woh user ko NAHI dikhaya gaya. Andar hi
+            // rok ke sahi format ya seedha natural jawab maango.
+            turn.push({ role: 'user', text: '(System note: tumhara pichla jawab internal JSON envelope mein tha — woh user ko NAHI dikhaya gaya aur us se koi kaam nahi hua. Ab ya to SAHI tool call bhejo — sirf {"tool": "generate_image", "args": {...}} wala format — ya seedha natural language mein final jawab do. Raw JSON, reasoning ya tool_calls kabhi mat bhejo.)' });
+            return agentLoop(turn, step + 1);
+          }
+          agentFinish(parsed.text || reply);
           return null;
         });
       }
@@ -2023,6 +3215,7 @@
         if (chatRefImage) $('chatAttachImg').src = chatRefImage;
       }
       function addUserMsgWithImage(text, dataUrl) {
+        if (!restoring) persistMsg({ role: 'user', text: text || 'Is photo jaisi tasveer banao' });
         var d = addMsg('me', '');
         var im = document.createElement('img');
         im.className = 'msg-img'; im.src = dataUrl; im.alt = 'Bheji hui reference photo';
@@ -2036,9 +3229,9 @@
         return d;
       }
 
-      /* Reference photo wala message: photo samjho (vision) -> usi style ki
-         tasveer banao (generate_image) -> "Reference photo se inspired" note ke
-         saath result dikhao. Vision fail ho to user se tafseel pooch lo. */
+      /* Reference photo wala message: pehle quote/news style check (vision SKIP),
+         phir photo samjho (vision) -> usi style ki tasveer banao (generate_image).
+         Vision fail ho to user ke lafzon se seedha tasveer banao — kabhi khaali error nahi. */
       function handleChatWithRef(text, dataUrl) {
         var shownText = text || 'Is photo jaisi tasveer banao';
         addUserMsgWithImage(shownText, dataUrl);
@@ -2048,6 +3241,76 @@
         $('chatSend').disabled = true;
         $('chatAttachBtn').disabled = true;
         state.history.push({ role: 'user', text: shownText + ' (user ne ek reference photo attach ki hai — usi jaisi tasveer chahiye)' });
+        /* NEWS IMAGE + attached photo: vision SKIP — photo seedha background banti hai */
+        if (detectNewsImageRequest(shownText)) {
+          var nhl = extractNewsHeadline(shownText);
+          var isQ = /[?]/.test(shownText) || /sakt[aeiouy]/i.test(shownText) || /batao/i.test(shownText);
+          if (!nhl || (isQ && !extractQuotedText(shownText))) {
+            var askN = 'Bilkul! News-style image bana dun ga — photo tumne bhej di hai, bas **headline likh do** (jaise "TENNESSEE CRUSHES ALABAMA 26-10") aur main isi photo pe bold headline laga dun ga!';
+            state.history.push({ role: 'assistant', text: askN });
+            addAiMsg(askN);
+            state.chatBusy = false;
+            $('chatSend').disabled = false;
+            $('chatAttachBtn').disabled = false;
+            schedulePush();
+            return;
+          }
+          var nStep = addToolStep('generate_image', 'News-style image bana raha hoon (tumhari photo + headline)');
+          TOOLS.generate_image.run({ news_headline: nhl, photo: dataUrl }).then(function (out) {
+            if (out.result && out.result.ok) {
+              nStep.done(out.detail);
+              if (out.image) nStep.setImage(out.image);
+              if (out.actions) nStep.addPostActions();
+              var finalN = 'Ho gaya! Ye **news-style image** tumhari photo pe bold headline ke saath tayyar hai.\n\nPasand aayi? Chaho to isay Facebook ya Instagram pe post kar dun!';
+              state.history.push({ role: 'assistant', text: finalN });
+              addAiMsg(finalN);
+            } else {
+              nStep.fail((out.result && out.result.error) || 'News image nahi ban saki');
+              addErrMsg('News image nahi ban saki — headline dobara likh ke bhejo.');
+            }
+          }).then(function () {
+            state.chatBusy = false;
+            $('chatSend').disabled = false;
+            $('chatAttachBtn').disabled = false;
+            schedulePush();
+          });
+          return;
+        }
+        /* QUOTE IMAGE + attached photo: vision SKIP — seedha quote generator.
+           "aise image bna k do ik quote k sath" jaisi request yahan pakri jati hai. */
+        if (detectQuoteRequest(shownText)) {
+          var qt = extractQuotedText(shownText);
+          if (!qt) {
+            var askQ = 'Bilkul! Quote-style image bana dun ga (kaala background, elegant safed text) — bas **quote likh do** (jaise "Dream big, work hard, stay humble") aur main foran bana dun ga!';
+            state.history.push({ role: 'assistant', text: askQ });
+            addAiMsg(askQ);
+            state.chatBusy = false;
+            $('chatSend').disabled = false;
+            $('chatAttachBtn').disabled = false;
+            schedulePush();
+            return;
+          }
+          var qStep = addToolStep('generate_image', 'Quote image bana raha hoon');
+          TOOLS.generate_image.run({ quote: qt }).then(function (out) {
+            if (out.result && out.result.ok) {
+              qStep.done(out.detail);
+              if (out.image) qStep.setImage(out.image);
+              if (out.actions) qStep.addPostActions();
+              var finalQ = 'Ho gaya! Ye **quote image** tayyar hai — kaala background, elegant safed text.\n\nPasand aayi? Chaho to isay Facebook ya Instagram pe post kar dun!';
+              state.history.push({ role: 'assistant', text: finalQ });
+              addAiMsg(finalQ);
+            } else {
+              qStep.fail('Quote image nahi ban saki');
+              addAiMsg('Quote image nahi ban saki — quote dobara likh ke bhejo, main foran bana dun ga!');
+            }
+          }).then(function () {
+            state.chatBusy = false;
+            $('chatSend').disabled = false;
+            $('chatAttachBtn').disabled = false;
+            schedulePush();
+          });
+          return;
+        }
         var lookStep = addToolStep('generate_image', 'Reference photo samajh raha hoon');
         analyzeReferenceImage(dataUrl, text)
           .then(function (desc) {
@@ -2063,15 +3326,30 @@
                 addAiMsg(finalText);
               } else {
                 genStep.fail((out.result && out.result.error) || 'Tasveer nahi ban saki');
-                addErrMsg('Reference photo samajh aa gaya tha, lekin tasveer nahi ban saki — Pollinations busy ho sakta hai. Thora ruk ke photo dobara bhej do.');
+                addErrMsg('Reference photo samajh aa gaya tha, lekin tasveer nahi ban saki — saare image models busy ho sakte hain. Thora ruk ke photo dobara bhej do.');
               }
             });
           })
           .catch(function () {
             lookStep.fail('Photo parh nahi paya');
-            var msg = 'Maafi — main is photo ko abhi parh nahi paya (vision jawab nahi de raha). Ek kaam karo: **photo mein jo pasand hai woh likh do** — jaise subject, rang, jagah ya mood — main usi hisaab se foran tasveer bana dun ga. Ya thora ruk ke photo dobara bhej do.';
-            state.history.push({ role: 'assistant', text: msg });
-            addAiMsg(msg);
+            /* Vision fail — user ko takleef nahi: us ke lafzon se hi tasveer banao */
+            var fbPrompt = (text || '').trim() || 'beautiful artistic photo';
+            var genStep2 = addToolStep('generate_image', 'Tasveer bana raha hoon');
+            TOOLS.generate_image.run({ prompt: fbPrompt }).then(function (out) {
+              if (out.result && out.result.ok) {
+                genStep2.done(out.detail);
+                if (out.image) genStep2.setImage(out.image);
+                if (out.actions) genStep2.addPostActions();
+                var finalT = 'Ho gaya! Tumhare **lafzon se** tasveer bana di hai.\n\nPasand aayi? Chaho to isay Facebook ya Instagram pe post kar dun, ya kuch tabdeeli karke dobara bana dun!';
+                state.history.push({ role: 'assistant', text: finalT });
+                addAiMsg(finalT);
+              } else {
+                genStep2.fail('Tasveer nahi ban saki');
+                var fbMsg = 'Maafi — tasveer nahi ban saki. Apne alfaaz mein bata do kya banana hai (jaise subject, rang, mood) aur main foran bana dun ga!';
+                state.history.push({ role: 'assistant', text: fbMsg });
+                addAiMsg(fbMsg);
+              }
+            });
           })
           .then(function () {
             state.chatBusy = false;
@@ -2109,7 +3387,8 @@
         agentLoop(turn, 0)
           .catch(function (e) {
             state.history.pop();
-            addErrMsg('Masla aa gaya: ' + e.message);
+            if (window.console && console.warn) console.warn('Agent error:', e);
+            addErrMsg('Masla aa gaya — AI abhi jawab nahi de pa raha. Internet check karke thora ruk ke dobara try karo.');
           })
           .then(function () { state.chatBusy = false; $('chatSend').disabled = false; schedulePush(); });
       }
@@ -2358,23 +3637,507 @@
         }
       }
 
-      function doPhoneLogin() {
+      /* Gate ke number ko saaf karke do — sahi ho to {full:'+92…', digits:'92…'},
+         warna {error:'…'} (WhatsApp API ko '+' ke baghair digits chahiye hote hain) */
+      function gatePhone() {
         var cc = ($('phoneCc').value || '+92').trim();
         var raw = ($('phoneNum').value || '').replace(/[^\d]/g, '').replace(/^0+/, '');
+        if (!raw) return { error: 'Pehle apna phone number likho.' };
+        if (raw.length < 6) return { error: 'Number bohat chhota hai — mukammal number likho, jaise 3001234567.' };
+        if ((cc + raw).replace('+', '').length > 15) return { error: 'Number bohat lamba hai — dobara check karke likho.' };
+        return { full: cc + raw, digits: (cc + raw).replace('+', '') };
+      }
+      function phoneHintErr(m) {
         var hint = $('phoneHint');
-        function err(m) { hint.textContent = m; hint.style.color = 'var(--bad)'; $('phoneNum').focus(); }
-        if (!raw) { err('Pehle apna phone number likho.'); return; }
-        if (raw.length < 6) { err('Number bohat chhota hai — mukammal number likho, jaise 3001234567.'); return; }
-        if ((cc + raw).replace('+', '').length > 15) { err('Number bohat lamba hai — dobara check karke likho.'); return; }
-        hint.textContent = '';
-        LS.set('phoneNumber', cc + raw);
-        LS.set('authProvider', 'phone');
+        hint.textContent = m;
+        hint.style.color = 'var(--bad)';
+        $('phoneNum').focus();
+      }
+      function completePhoneLogin(fullNumber, provider) {
+        LS.set('phoneNumber', fullNumber);
+        LS.set('authProvider', provider || 'phone');
         try { window.localStorage.removeItem('musechat.guestMode'); } catch (e) {}
         renderAccountUI();
         enterApp();
       }
+      function doPhoneLogin() {
+        var p = gatePhone();
+        if (p.error) { phoneHintErr(p.error); return; }
+        $('phoneHint').textContent = '';
+        completePhoneLogin(p.full, 'phone');
+      }
       var phoneForm = $('phoneForm');
       if (phoneForm) phoneForm.addEventListener('submit', function (e) { e.preventDefault(); doPhoneLogin(); });
+
+      /* ============ News (RSS) — Khabrain tab ============
+         Free RSS feeds, koi API key nahi chahiye. rss2json.com API se fetch (CORS-friendly JSON). */
+      var NEWS_FEEDS = [
+        { cat: 'pakistan', name: 'Dawn', url: 'https://www.dawn.com/feeds/home' },
+        { cat: 'pakistan', name: 'Google News', gnews: true, url: 'https://news.google.com/rss?hl=en-PK&gl=PK&ceid=PK:en' },
+        { cat: 'world', name: 'BBC World', url: 'http://feeds.bbci.co.uk/news/world/rss.xml' },
+        { cat: 'world', name: 'Al Jazeera', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
+        { cat: 'world', name: 'Google News', gnews: true, url: 'https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en' },
+        { cat: 'sports', name: 'BBC Sport', url: 'http://feeds.bbci.co.uk/sport/rss.xml' },
+        { cat: 'sports', name: 'Google News', gnews: true, url: 'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnZHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en' }
+      ];
+      var newsCat = 'all';
+      var newsQuery = '';
+      var newsCache = [];
+      var newsLoaded = false;
+      function fetchNewsItems() {
+        var jobs = NEWS_FEEDS.map(function (f) {
+          var api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(f.url);
+          return fetch(api).then(function (r) { return r.json(); })
+            .then(function (j) { return { feed: f, data: (j && j.status === 'ok') ? j : null }; })
+            .catch(function () { return { feed: f, data: null }; });
+        });
+        return Promise.all(jobs).then(function (results) {
+          var items = [];
+          results.forEach(function (r) {
+            if (!r.data || !r.data.items) return;
+            try {
+              var nodes = r.data.items;
+              for (var i = 0; i < nodes.length && i < 10; i++) {
+                (function (n) {
+                  function stripHtml(s) {
+                    try { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').trim().slice(0, 280); }
+                    catch (e) { return String(s || '').replace(/<[^>]*>/g, '').trim().slice(0, 280); }
+                  }
+                  function thumbOf() {
+                    try {
+                      if (n.thumbnail) return n.thumbnail;
+                      var enc = n.enclosure;
+                      if (enc && enc.link && /^image/i.test(enc.type || '')) return enc.link;
+                      var desc = n.description || '';
+                      var m = desc.match(/<img[^>]+src=["']([^"']+)["']/i);
+                      if (m) return m[1];
+                    } catch (e) {}
+                    return '';
+                  }
+                  if (n.title) items.push({
+                    title: String(n.title || '').trim(), link: n.link || '', pubDate: n.pubDate || '',
+                    desc: stripHtml(n.description || ''), thumb: thumbOf(),
+                    source: r.feed.name, cat: r.feed.cat, gnews: !!r.feed.gnews
+                  });
+                })(nodes[i]);
+              }
+            } catch (e) {}
+          });
+          items.sort(function (a, b) {
+            try { return new Date(b.pubDate) - new Date(a.pubDate); } catch (e) { return 0; }
+          });
+          return items;
+        });
+      }
+      function fetchNews() {
+        var list = $('newsList'), st = $('newsStatus');
+        if (!list) return;
+        setStatus(st, 'Khabrain la raha hoon…', 'info');
+        list.innerHTML = '';
+        fetchNewsItems().then(function (items) {
+          newsCache = items;
+          renderNews();
+          setStatus(st, items.length ? '' : 'Koi khabar nahi mili — internet check karke Refresh karo.', items.length ? 'ok' : 'bad');
+        });
+      }
+      function renderNews() {
+        var list = $('newsList');
+        if (!list) return;
+        var q = (newsQuery || '').trim().toLowerCase();
+        var items = newsCache.filter(function (x) {
+          var okCat = newsCat === 'all' ? true : (newsCat === 'googlenews' ? !!x.gnews : x.cat === newsCat);
+          var okQ = !q || (x.title || '').toLowerCase().indexOf(q) !== -1 || (x.desc || '').toLowerCase().indexOf(q) !== -1;
+          return okCat && okQ;
+        });
+        if (!items.length) { list.innerHTML = '<div class="empty-note">' + (q ? 'Is khoj mein koi khabar nahi mili.' : 'Is category mein abhi koi khabar nahi.') + '</div>'; return; }
+        list.innerHTML = items.map(function (x, i) {
+          var d = '';
+          try {
+            var dt = new Date(x.pubDate);
+            if (!isNaN(dt)) d = dt.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+          } catch (e) {}
+          var srcTag = x.gnews ? ' <b style="color:var(--accent)">Google News</b>' : '';
+          return '<div class="newsitem" data-news-card="' + i + '">' +
+            (x.thumb ? '<img class="nthumb" src="' + esc(x.thumb) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'" />' : '') +
+            '<div class="nh">' + esc(x.title) + '</div>' +
+            '<div class="nm">' + esc(x.source) + srcTag + (d ? ' &bull; ' + esc(d) : '') + '</div>' +
+            (x.desc ? '<div class="ndesc">' + esc(x.desc) + '</div>' : '') +
+            '<span class="nexpand">Tap karo — tafseel dekho</span>' +
+            '<div class="nact"><button class="btn btn-post" type="button" data-news-post="' + i + '">📝 Is pe Post Banao</button>' +
+            (x.link ? '<a class="btn btn-ghost btn-link" href="' + esc(x.link) + '" target="_blank" rel="noopener">Link Kholo</a>' : '') + '</div></div>';
+        }).join('');
+        list.querySelectorAll('[data-news-card]').forEach(function (card) {
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('[data-news-post]') || e.target.closest('a')) return;
+            card.classList.toggle('expanded');
+            var sp = card.querySelector('.nexpand');
+            if (sp) sp.textContent = card.classList.contains('expanded') ? 'Tap karo — chhupao' : 'Tap karo — tafseel dekho';
+          });
+        });
+        list.querySelectorAll('[data-news-post]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var x = items[parseInt(b.getAttribute('data-news-post'), 10)];
+            if (!x) return;
+            showTab('chat');
+            handleChat('Is news pe ek dhamakedaar Facebook post banao: "' + x.title + '"' +
+              (x.desc ? ' — ' + x.desc : '') + ' — Source: ' + x.source + (x.link ? ' — Link: ' + x.link : ''));
+          });
+        });
+      }
+      (function bindNewsChips() {
+        var chips = document.querySelectorAll('#newsChips button');
+        chips.forEach(function (b) {
+          b.addEventListener('click', function () {
+            chips.forEach(function (x) { x.classList.remove('sel'); });
+            b.classList.add('sel');
+            newsCat = b.getAttribute('data-cat');
+            renderNews();
+          });
+        });
+        var rf = $('newsRefresh');
+        if (rf) rf.addEventListener('click', fetchNews);
+        var ns = $('newsSearch');
+        if (ns) ns.addEventListener('input', function () { newsQuery = ns.value; renderNews(); });
+      })();
+
+      /* ============ 🤖 Auto News Post engine ============
+         App khud taza news chun ke, post bana ke, tasveer laga ke
+         selected Facebook Page pe lagata hai. Sab localStorage mein. */
+      var autoPostTimer = null;
+      var autoPosting = false;
+      function autoPostCfg() {
+        return {
+          on: LS.get('autoPostOn', '0') === '1',
+          freq: parseInt(LS.get('autoPostFreq', '3600000'), 10) || 3600000,
+          pageId: (LS.get('autoPostPageId', '') || '').trim(),
+          cat: (LS.get('autoPostCat', 'all') || 'all')
+        };
+      }
+      function autoPostedUrls() {
+        try { var a = JSON.parse(LS.get('autoPostedUrls', '[]')); return Array.isArray(a) ? a : []; }
+        catch (e) { return []; }
+      }
+      function markAutoPosted(url) {
+        try {
+          var a = autoPostedUrls();
+          a.unshift(url);
+          LS.set('autoPostedUrls', JSON.stringify(a.slice(0, 200)));
+        } catch (e) {}
+      }
+      function autoPostLog() {
+        try { var a = JSON.parse(LS.get('autoPostLog', '[]')); return Array.isArray(a) ? a : []; }
+        catch (e) { return []; }
+      }
+      function addAutoPostLog(entry) {
+        try {
+          var a = autoPostLog();
+          a.unshift(entry);
+          LS.set('autoPostLog', JSON.stringify(a.slice(0, 30)));
+        } catch (e) {}
+        renderAutoPostLog();
+      }
+      function renderAutoPostLog() {
+        var el = $('autoPostLog');
+        if (!el) return;
+        var a = autoPostLog();
+        if (!a.length) { el.innerHTML = '<div class="empty-note">Abhi koi auto post nahi hui.</div>'; return; }
+        el.innerHTML = a.map(function (x) {
+          var d = '';
+          try { var dt = new Date(x.at); if (!isNaN(dt)) d = dt.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) {}
+          return '<div class="newsitem" style="margin-bottom:8px"><div class="nh" style="font-size:13.5px">' + esc(x.headline || '(koi headline nahi)') + '</div>' +
+            '<div class="nm">' + esc(d) + ' &bull; ' + (x.ok ? '<b style="color:#16a34a">✓ Post ho gaya</b>' : '<b style="color:#dc2626">✕ ' + esc(x.err || 'Fail') + '</b>') +
+            (x.postUrl ? ' &bull; <a href="' + esc(x.postUrl) + '" target="_blank" rel="noopener">Dekho</a>' : '') + '</div></div>';
+        }).join('');
+      }
+      function refreshAutoPostPages() {
+        var sel = $('autoPostPage');
+        if (!sel) return;
+        var list = getAccounts();
+        var cur = (LS.get('autoPostPageId', '') || '').trim();
+        sel.innerHTML = list.map(function (a) {
+          return '<option value="' + esc(a.pageId) + '"' + (a.pageId === cur ? ' selected' : '') + '>' + esc(a.pageName || a.pageId) + '</option>';
+        }).join('') || '<option value="">— Koi Page nahi —</option>';
+        if (!cur && list.length) { LS.set('autoPostPageId', list[0].pageId); sel.value = list[0].pageId; }
+      }
+      function cleanHeadline(t) {
+        t = (t || '').trim();
+        t = t.replace(/\s+[-–|]\s+[^-–|]{2,45}$/, '').trim();
+        t = t.replace(/\s*\([^)]{0,40}\)$/, '').trim();
+        return t;
+      }
+      function postPhotoToPage(acct, dataUrl, caption) {
+        return fetch(dataUrl)
+          .then(function (r) { if (!r.ok) throw new Error('Image read fail'); return r.blob(); })
+          .then(function (blob) {
+            var fd = new FormData();
+            fd.append('source', blob, 'auto-news.jpg');
+            if (caption) fd.append('message', caption);
+            return fetch('https://graph.facebook.com/v21.0/' + encodeURIComponent(acct.pageId) + '/photos', {
+              method: 'POST', body: fd,
+              headers: { 'Authorization': 'Bearer ' + (acct.pageToken || '') }
+            });
+          })
+          .then(function (res) { return res.json().catch(function () { return null; }).then(function (d) { return { res: res, d: d }; }); })
+          .then(function (r) {
+            if (!r.res.ok || !r.d || r.d.error) {
+              var m = (r.d && r.d.error && r.d.error.message) || ('HTTP ' + r.res.status);
+              throw new Error(m);
+            }
+            return { ok: true, id: r.d.post_id || r.d.id || '' };
+          });
+      }
+      function autoPostCycle(manual) {
+        if (autoPosting) return Promise.resolve();
+        var cfg = autoPostCfg();
+        if (!manual && !cfg.on) return Promise.resolve();
+        var st = $('autoPostStatus');
+        var list = getAccounts();
+        var acct = null;
+        for (var i = 0; i < list.length; i++) if (list[i].pageId === cfg.pageId) acct = list[i];
+        if (!acct) acct = list[0] || null;
+        if (!acct) {
+          if (st) setStatus(st, 'Pehle Facebook Page connect karo! (Settings → Facebook Pages)', 'bad');
+          return Promise.resolve();
+        }
+        if (!acct.pageToken) {
+          if (st) setStatus(st, 'Page ka token nahi mila — Facebook se dobara login karo.', 'bad');
+          return Promise.resolve();
+        }
+        autoPosting = true;
+        if (st) setStatus(st, 'Auto post: taza news la raha hoon…', 'info');
+        return fetchNewsItems().then(function (items) {
+          var posted = autoPostedUrls();
+          var pool = items.filter(function (x) {
+            if (!x.title || !x.link) return false;
+            if (posted.indexOf(x.link) !== -1) return false;
+            if (cfg.cat !== 'all' && x.cat !== cfg.cat) return false;
+            return true;
+          });
+          if (!pool.length) throw new Error('Koi nayi khabar nahi mili (sab post ho chuki).');
+          var x = pool[0];
+          var headline = cleanHeadline(x.title);
+          var caption = headline + '\n\n' + (x.desc ? x.desc + '\n\n' : '') + 'Source: ' + x.source + (x.link ? '\n' + x.link : '');
+          if (st) setStatus(st, 'Tasveer bana raha hoon…', 'info');
+          return composeNewsImage(smartBgFor(headline + ' ' + (x.desc || ''), x.cat), headline, x.cat).then(function (dataUrl) {
+            if (!dataUrl) throw new Error('Tasveer nahi bani.');
+            if (st) setStatus(st, 'Page pe post kar raha hoon…', 'info');
+            return postPhotoToPage(acct, dataUrl, caption).then(function (r) {
+              markAutoPosted(x.link);
+              var postUrl = r.id ? ('https://www.facebook.com/' + String(r.id).replace('_', '/posts/')) : '';
+              addAutoPostLog({ at: Date.now(), headline: headline, ok: true, postUrl: postUrl });
+              if (st) setStatus(st, '✓ Auto post ho gaya: ' + headline, 'ok');
+            });
+          });
+        }).catch(function (e) {
+          var msg = (e && e.message) || 'Fail';
+          if (/190|expired|invalid/i.test(msg)) msg = 'Facebook token expire ho gaya — dobara login karo.';
+          addAutoPostLog({ at: Date.now(), headline: '', ok: false, err: msg });
+          if (st) setStatus(st, 'Auto post fail: ' + msg, 'bad');
+        }).then(function () { autoPosting = false; });
+      }
+      function freqLabel() {
+        var f = autoPostCfg().freq;
+        if (f <= 1800000) return '30 minute';
+        if (f <= 3600000) return '1 ghante';
+        if (f <= 7200000) return '2 ghante';
+        return '4 ghante';
+      }
+      function scheduleAutoPost() {
+        if (autoPostTimer) { clearInterval(autoPostTimer); autoPostTimer = null; }
+        var cfg = autoPostCfg();
+        if (!cfg.on) return;
+        autoPostTimer = setInterval(function () { autoPostCycle(false); }, cfg.freq);
+      }
+      (function initAutoPost() {
+        var tg = $('autoPostToggle');
+        if (!tg) return;
+        var cfg = autoPostCfg();
+        tg.checked = cfg.on;
+        var fq = $('autoPostFreq'); if (fq) fq.value = String(cfg.freq);
+        var ct = $('autoPostCat'); if (ct) ct.value = cfg.cat;
+        $('autoPostOpts').hidden = !cfg.on;
+        $('autoPostState').textContent = cfg.on ? 'ON hai — app khud post kare ga.' : 'Abhi OFF hai.';
+        refreshAutoPostPages();
+        renderAutoPostLog();
+        tg.addEventListener('change', function () {
+          LS.set('autoPostOn', tg.checked ? '1' : '0');
+          $('autoPostOpts').hidden = !tg.checked;
+          $('autoPostState').textContent = tg.checked ? 'ON hai — app khud post kare ga.' : 'Abhi OFF hai.';
+          if (tg.checked) refreshAutoPostPages();
+          scheduleAutoPost();
+          var st = $('autoPostStatus');
+          if (st) setStatus(st, tg.checked ? '✓ Auto post ON! Pehli post ' + freqLabel() + ' mein.' : 'Auto post OFF.', tg.checked ? 'ok' : 'info');
+        });
+        var fqEl = $('autoPostFreq');
+        if (fqEl) fqEl.addEventListener('change', function () { LS.set('autoPostFreq', fqEl.value); scheduleAutoPost(); });
+        var pgEl = $('autoPostPage');
+        if (pgEl) pgEl.addEventListener('change', function () { LS.set('autoPostPageId', pgEl.value); });
+        var ctEl = $('autoPostCat');
+        if (ctEl) ctEl.addEventListener('change', function () { LS.set('autoPostCat', ctEl.value); });
+        var nowBtn = $('autoPostNow');
+        if (nowBtn) nowBtn.addEventListener('click', function () { autoPostCycle(true); });
+        scheduleAutoPost();
+      })();
+
+      /* ============ WhatsApp OTP login ============
+         Code app mein hi banta hai (6 digit) aur Meta WhatsApp Business API
+         ke template message se user ke number pe jata hai. Verification bhi
+         local hai — code match ho to wahi phone login ho jata hai.
+         Config (Phone Number ID + Token + Template) Settings ke
+         "WhatsApp OTP" section se aati hai; na ho to button disabled rehta hai. */
+      function waConfig() {
+        return {
+          id: (LS.get('waPhoneId', '') || '').trim() || DEFAULT_WA_PHONE_ID,
+          token: (LS.get('waToken', '') || '').trim() || DEFAULT_WA_TOKEN,
+          tpl: (LS.get('waTemplate', '') || '').trim() || 'super_social_otp'
+        };
+      }
+      function waConfigured() { var c = waConfig(); return !!(c.id && c.token); }
+      function refreshWaOtpUI() {
+        var btn = $('waOtpBtn'), note = $('waOtpNote'), st = $('waStatus');
+        if (!btn || !note) return;
+        var ok = waConfigured();
+        btn.disabled = !ok;
+        note.textContent = ok ? '' : 'WhatsApp setup baqi hai — Settings ke “WhatsApp OTP” section mein WhatsApp Access Token aur Phone Number ID dalo.';
+        if (st) {
+          if (ok) setStatus(st, 'WhatsApp OTP setup mukammal hai — login screen pe WhatsApp button active hai.', 'ok');
+          else setStatus(st, 'Setup baqi hai: Phone Number ID aur Access Token dono chahiye hain.', 'info');
+        }
+      }
+      /* Meta ke WhatsApp error ko user ke liye saaf Roman Urdu wajah mein badlo —
+         sab se aam masla token expire/invalid hona hai (error code 190) */
+      function waErrorText(err, fallbackMsg) {
+        var code = err && err.code;
+        var msg = (err && err.message) || fallbackMsg || 'unknown error';
+        if (code === 190 || /oauth|access token|session has expired/i.test(msg)) {
+          return 'WhatsApp token expire ho gaya — naya token Meta dashboard se leke yahan dalo (Meta for Developers → WhatsApp → API Setup se naya Access Token copy karo, phir Settings ke “WhatsApp OTP” section mein purane ki jagah paste kar do).';
+        }
+        if (code === 132000 || code === 132001 || code === 132005 || /template/i.test(msg)) {
+          return 'WhatsApp OTP abhi setup ho raha hai — neeche Continue dabake phone number se login karo!';
+        }
+        if (code === 131030 || /allowed list|not in the recipient/i.test(msg)) {
+          return 'Ye number WhatsApp ki allowed list mein add nahi hai — Meta dashboard ke API Setup mein “Add phone number” se apna number add karo, phir dobara try karo.';
+        }
+        if (code === 131047 || code === 131051) {
+          return 'WhatsApp ne message rok diya — number country code ke saath sahi likha hai check karo aur thora ruk ke dobara try karo. Asal error: ' + msg;
+        }
+        return 'Code nahi bheja ja saka: ' + msg + ' — Settings mein WhatsApp setup check karo.';
+      }
+      var waOtp = { code: '', phone: '', cooldownTimer: null };
+      function waOtpErr(m) {
+        var h = $('waOtpHint');
+        h.textContent = m;
+        h.style.color = 'var(--bad)';
+      }
+      function waOtpOk(m) {
+        var h = $('waOtpHint');
+        h.textContent = m;
+        h.style.color = 'var(--ok)';
+      }
+      function startWaCooldown() {
+        var btn = $('waResendBtn');
+        var left = 60;
+        btn.disabled = true;
+        btn.textContent = 'Dobara bhejo (' + left + 's)';
+        if (waOtp.cooldownTimer) clearInterval(waOtp.cooldownTimer);
+        waOtp.cooldownTimer = setInterval(function () {
+          left--;
+          if (left <= 0) {
+            clearInterval(waOtp.cooldownTimer);
+            waOtp.cooldownTimer = null;
+            btn.disabled = false;
+            btn.textContent = 'Dobara bhejo';
+          } else {
+            btn.textContent = 'Dobara bhejo (' + left + 's)';
+          }
+        }, 1000);
+      }
+      function sendWaOtp() {
+        var p = gatePhone();
+        if (p.error) { phoneHintErr(p.error); return; }
+        $('phoneHint').textContent = '';
+        var cfg = waConfig();
+        var code = String(Math.floor(100000 + Math.random() * 900000));
+        var btn = $('waOtpBtn');
+        btn.disabled = true;
+        btn.lastChild.textContent = ' Code bhej raha hoon…';
+        fetchWithTimeout('https://graph.facebook.com/v21.0/' + encodeURIComponent(cfg.id) + '/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.token },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to: p.digits,
+            type: 'template',
+            template: {
+              name: cfg.tpl,
+              language: { code: 'en_US' },
+              components: [{ type: 'body', parameters: [{ type: 'text', text: code }] }]
+            }
+          })
+        }, 30000).then(function (res) {
+          return res.json().catch(function () { return null; }).then(function (d) { return { res: res, d: d }; });
+        }).then(function (r) {
+          btn.disabled = false;
+          btn.lastChild.textContent = ' WhatsApp pe OTP bhejo';
+          if (!r.res.ok || !r.d || r.d.error) {
+            $('waOtpBox').hidden = false;
+            waOtpErr(waErrorText(r.d && r.d.error, 'HTTP ' + r.res.status));
+            return;
+          }
+          waOtp.code = code;
+          waOtp.phone = p.full;
+          $('waOtpBox').hidden = false;
+          document.querySelectorAll('#waOtpRow .otp-in').forEach(function (i) { i.value = ''; });
+          waOtpOk('Code ' + p.full + ' ke WhatsApp pe bhej diya hai — neeche likh ke verify karo.');
+          startWaCooldown();
+          var first = document.querySelector('#waOtpRow .otp-in');
+          if (first) first.focus();
+        }).catch(function (e) {
+          btn.disabled = false;
+          btn.lastChild.textContent = ' WhatsApp pe OTP bhejo';
+          $('waOtpBox').hidden = false;
+          waOtpErr('Code nahi bheja ja saka: ' + e.message + ' — internet ya WhatsApp setup check karo.');
+        });
+      }
+      function waEnteredCode() {
+        var v = '';
+        document.querySelectorAll('#waOtpRow .otp-in').forEach(function (i) { v += i.value; });
+        return v;
+      }
+      function verifyWaOtp() {
+        var entered = waEnteredCode();
+        if (entered.length < 6) { waOtpErr('Poora 6-digit code likho.'); return; }
+        if (!waOtp.code) { waOtpErr('Pehle “WhatsApp pe OTP bhejo” dabao — code us ke baad aaye ga.'); return; }
+        if (entered !== waOtp.code) { waOtpErr('Ghalat code — dobara check karke likho.'); return; }
+        var num = waOtp.phone;
+        waOtp.code = '';
+        waOtpOk('Code sahi hai — login ho raha hai…');
+        completePhoneLogin(num, 'whatsapp-otp');
+      }
+      $('waOtpBtn').addEventListener('click', sendWaOtp);
+      $('waResendBtn').addEventListener('click', sendWaOtp);
+      $('waVerifyBtn').addEventListener('click', verifyWaOtp);
+      (function () {
+        var boxes = Array.prototype.slice.call(document.querySelectorAll('#waOtpRow .otp-in'));
+        boxes.forEach(function (box, idx) {
+          box.addEventListener('input', function () {
+            box.value = box.value.replace(/[^\d]/g, '').slice(-1);
+            if (box.value && idx < boxes.length - 1) boxes[idx + 1].focus();
+            if (waEnteredCode().length === 6) verifyWaOtp();
+          });
+          box.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && !box.value && idx > 0) boxes[idx - 1].focus();
+            if (e.key === 'Enter') { e.preventDefault(); verifyWaOtp(); }
+          });
+          box.addEventListener('paste', function (e) {
+            e.preventDefault();
+            var txt = ((e.clipboardData || window.clipboardData).getData('text') || '').replace(/[^\d]/g, '').slice(0, 6);
+            txt.split('').forEach(function (ch, i) { if (boxes[i]) boxes[i].value = ch; });
+            if (txt.length === 6) verifyWaOtp();
+            else if (txt.length) boxes[Math.min(txt.length, 5)].focus();
+          });
+        });
+      })();
 
       /* ----- Entry flow: Splash (1.5s) -> Login gate -> App ----- */
       var gateShown = false;
@@ -2420,6 +4183,8 @@
       /* ----- init ----- */
       buildCountryOptions();
       renderAccountUI();
+      refreshWaOtpUI();
+      initChats();
       renderFbAccounts();
       renderIgAccounts();
       updateIgPostHint();

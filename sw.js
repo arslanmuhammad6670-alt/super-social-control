@@ -1,6 +1,6 @@
 /* Super Social Control PWA — service worker
-   App shell ko cache karta hai taa k app offline bhi khule.
-   API calls (Pollinations / Facebook) hamesha network se jati hain. */
+   App shell cached so the app opens offline.
+   API calls (Pollinations / Facebook) always go to network. */
 var CACHE = 'super-social-v7';
 var SHELL = [
   './',
@@ -30,7 +30,7 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   var url = event.request.url;
-  // Sirf apni origin ki GET requests cache-first; baqi sab seedha network.
+  // Only cache-first for same-origin GET requests; everything else goes to network.
   if (event.request.method !== 'GET' || url.indexOf(self.location.origin) !== 0) return;
   event.respondWith(
     caches.match(event.request).then(function (hit) {
